@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js"
   },
-  "author": "Juan Rodriguez",
+  "author": "Miguel Leyton",
   "license": "ISC",
   "description": "",
   "dependencies": {
