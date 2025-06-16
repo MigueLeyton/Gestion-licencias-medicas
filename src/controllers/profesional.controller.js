@@ -78,6 +78,7 @@ export const obtenerProfesionalesPorIdController = async (req, res) => {
         }
         
         const resultado = await obtenerProfesionalesPorId(id);
+
         if (!resultado.success) {
             return res.status(400).json({
                 status: 400,
@@ -88,7 +89,7 @@ export const obtenerProfesionalesPorIdController = async (req, res) => {
             status: 200,
             data: resultado.profesionales
         });
-    }catch (error) {
+    } catch (error) {
         console.log("Error al obtener profesionales por ID:", error);
         res.status(500).json({
             status:500,
@@ -99,7 +100,7 @@ export const obtenerProfesionalesPorIdController = async (req, res) => {
 
 export const actualizarProfesionalController = async (req, res) => {
     try {
-        const { id} = req.params;
+        const { id } = req.params;
         const { rut, nombre, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono } = req.body;
 
         const profesionalActualizado = {
@@ -136,7 +137,6 @@ export const actualizarProfesionalController = async (req, res) => {
 export const eliminarProfesionalContoller = async (req, res) => {
     try {
         const {id} = req.params;
-
         if (!id) {
             return res.status(400).json({
                 status: 400,

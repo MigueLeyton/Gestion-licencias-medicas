@@ -122,7 +122,6 @@ export const actualizarUsuarioController = async (req, res) => {
 export const eliminarUsuarioController = async (req, res) => {
     try {
         const id = req.params.id;
-
         if (isNaN(id) || !id) {
             return res.status(400).json({ 
                 status: 400, 
@@ -131,7 +130,6 @@ export const eliminarUsuarioController = async (req, res) => {
         }
 
         const usuarioEliminado = await eliminarUsuario(id);
-
         return res.status(usuarioEliminado.status).json({ 
             status: usuarioEliminado.status, 
             message: usuarioEliminado.message, 

@@ -13,14 +13,14 @@ export const crearProfesional = async (profesionales) => {
                 success: true,
                 message: "Profesional creado exitosamente",
             };
-        } else {
-            return {
-                success: false,
-                message: "No se pudo crear el profesional",
-            };
-        }  
+        } 
+        return {
+            success: false,
+            message: "No se pudo crear el profesional",
+        };
+        
     } catch (error) {
-        console.error("Error al crear profesional:", error);
+        console.log("Error al crear profesional:", error);
         return {
             success: false,
             message: "Error al crear profesional"
@@ -38,13 +38,13 @@ export const obtenerProfesionales = async () => {
                 success: true,
                 profesionales: result
             };
-        } else {
-            return {
-                success: false, 
-                message: "No se encontraron profesionales"
-            };
-        }
+        } 
+        return {
+            success: false, 
+            message: "No se encontraron profesionales"
+        };       
     }
+    
     catch (error) {
         console.error("Error al obtener profesionales:", error);
         return {

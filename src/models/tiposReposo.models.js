@@ -15,11 +15,11 @@ export const crearTiposReposo = async (tipoReposo) => {
         } else {
             return {
                 seccess: false,
-                message: "No se pudo crear el tipo de reposo",
+                message: "No se pudo crear el tipo de reposo o ya existe",
             }
         }
     } catch (error) {
-        console.error("Error al crear tipo de reposo:", error);
+        console.log("Error al crear tipo de reposo:", error);
         return {
             success: false,
             message: "Error al crear tipo de reposo"
@@ -67,11 +67,11 @@ export const obtenerTiposReposoPorId = async (id) => {
         } else {
             return {
                 success: false,
-                message: "No se encontró el tipo de reposo"
+                message: "No se encontró el tipo de reposo por ID o no existe"
             };
         }
     } catch (error) {
-        console.error("Error al obtener tipo de reposo por ID:", error);
+        console.log("Error al obtener tipo de reposo por ID:", error);
         return {
             success: false,
             message: "Error al obtener tipo de reposo por ID"
@@ -86,6 +86,7 @@ export const actualizarTiposReposo = async (id, tipoReposo) => {
         const values = [nombre, id];
 
         const [result] = await db.query(query, values);
+        
         if (result.affectedRows > 0) {
             return {
                 success: true,
@@ -94,11 +95,11 @@ export const actualizarTiposReposo = async (id, tipoReposo) => {
         } else {
             return {
                 success: false,
-                message: "No se pudo actualizar el tipo de reposo"
+                message: "No se pudo actualizar el tipo de reposo o no se encontró"
             };
         }
     } catch (error) {
-        console.error("Error al actualizar tipo de reposo:", error);
+        console.log("Error al actualizar tipo de reposo:", error);
         return {
             success: false,
             message: "Error al actualizar tipo de reposo"
@@ -110,8 +111,8 @@ export const eliminarTiposReposo = async (id) => {
     try {
         const query = "UPDATE tipos_reposo SET eliminado = 1 WHERE id = ? AND eliminado != 1";
         const values = [id];
-
         const [result] = await db.query(query, values);
+        
         if (result.affectedRows > 0) {
             return {
                 success: true,
@@ -120,13 +121,14 @@ export const eliminarTiposReposo = async (id) => {
         } else {
             return {
                 success: false,
-                message: "No se pudo eliminar el tipo de reposo"
+                message: "No se pudo eliminar el tipo de reposo o no se encontró"
             };
         }
-    }catch (error) {console.error("Error al eliminar tipo de reposo:", error);
-        return {
-            success: false,
-            message: "Error al eliminar tipo de reposo"
+    } catch (error) {
+        console.log("Error al eliminar tipo de reposo:", error);
+            return {
+                success: false,
+                message: "Error al eliminar tipo de reposo"
         };
     }
 }

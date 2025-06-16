@@ -1,24 +1,25 @@
-import { crearTiposReposo, obtenerTiposReposo, obtenerTiposReposoPorId, actualizarTiposReposo, eliminarTiposReposo } from "../models/tiposReposo.models.js";
+import { crearLugaresReposo, obtenerLugaresReposo, obtenerLugaresReposoPorId, actualizarLugaresReposo, eliminarLugaresReposo } from "../models/lugaresReposo.models.js";
 
-export const crearTiposReposoController = async (req, res) => {
+export const crearLugaresReposoController = async (req, res) => {
     try {
         const { nombre } = req.body;
 
         if (!nombre) {
-            return res.status(400).json({
+            return res.satus(400).json({
                 status: 400,
-                message: "El nombre del tipo de resposo es obligatorio"
+                message: "El nombre del lugar de reposo es obligatorio"
             });
         }
 
-        const nuevoTipoReposo = {
+        const lugarReposo = {
             nombre
         };
 
-        const resultado = await crearTiposReposo(nuevoTipoReposo);
+        const resultado = await crearLugaresReposo(lugarReposo);
+
         if (!resultado.success) {
             return res.status(400).json({
-                status: 400, 
+                status: 400,
                 message: resultado.message
             });
         }
@@ -26,18 +27,18 @@ export const crearTiposReposoController = async (req, res) => {
             status: 201,
             message: resultado.message
         });
-    }catch (error) {
-        console.log("Error al crear tipo de reposo:", error);
+    } catch (error) {
+        console.log("Error al crear lugares de reposo:", error);
         res.status(500).json({
-            status: 500,
-            message: "Error al crear tipo de resposo"
+            status: 500, 
+            message: "Error al crear lugar de reposo"
         });
     }
 }
 
-export const obtenerTiposReposoController = async (req, res) => {
+export const obtenerLugaresReposoController = async (req, res) => {
     try {
-        const resultado = await obtenerTiposReposo();
+        const resultado = await obtenerLugaresReposo();
 
         if (!resultado.success) {
             return res.status(400).json({
@@ -47,29 +48,29 @@ export const obtenerTiposReposoController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
-            data: resultado.tipoReposo
+            data: resultado.lugarReposo
         });
     } catch (error) {
-        console.log("Error al obtener tipos de resposo:", error);
+        console.log("Error al obtener lugares de reposo:", error);
         res.status(500).json({
             status: 500,
-            message: "Error la obtener tipos de resposo"
+            message: "Error al obtener lugares de reposo"
         });
     }
 }
 
-export const obtenerTiposReposoPorIdController = async (req, res) => {
+export const obtenerLugaresReposoPorIdController = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
 
         if (!id) {
             return res.status(400).json({
                 status: 400,
-                message: "El ID del tipo de reposo es obligatorio"
+                message: "El ID del lugar de reposo es obligatorio"
             });
         }
 
-        const resultado = await obtenerTiposReposoPorId(id);
+        const resultado = await obtenerLugaresReposoPorId(id);
 
         if (!resultado.success) {
             return res.status(400).json({
@@ -79,28 +80,28 @@ export const obtenerTiposReposoPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
-            data: resultado.tipoReposo
+            data: resultado.lugarReposo
         });
-    }catch (error) {
-        console.log("Error al obtener tipo de reposo por ID:", error);
+    } catch (error) {
+        console.log("Error al obtener lugar de reposo por ID:", error);
         res.status(500).json({
             status: 500,
-            message: "Error al obtener tipo de reposo por ID"
+            message: "Error al obtener lugares de reposo por ID"
         });
     }
 }
 
-export const actualizarTiposReposoController = async (req, res) => {
+export const actualizarLugaresReposoController = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const { nombre } = req.body;
 
-        const tipoReposoActualizado = {
+        const lugarReposoActualizado = {
             nombre
-        }
+        };
 
-        const resultado = await actualizarTiposReposo(id, tipoReposoActualizado);
-        
+        const resultado = await actualizarLugaresReposo(id, lugarReposoActualizado);
+
         if (!resultado.success) {
             return res.status(400).json({
                 status: 400,
@@ -112,25 +113,25 @@ export const actualizarTiposReposoController = async (req, res) => {
             message: resultado.message
         });
     } catch (error) {
-        console.log("Error al actualizar tipo de reposo:", error);
+        console.log("Error al actualizar el lugar de trabajo:", error);
         res.status(500).json({
             status: 500,
-            message: "Error al actualizar tipo de resposo"
+            message: "Error al actualizar el lugar de reposo"
         });
     }
 }
 
-export const eliminarTiposReposoController = async (req, res) => {
+export const eliminarLugaresReposoController = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;  
         if (!id) {
             return res.status(400).json({
-                status : 400, 
-                message: "El ID del tipo de reposo es obligatorio"
+                status: 400,
+                message: "El ID del lugar de reposo es obligatorio"
             });
         }
-        
-        const resultado = await eliminarTiposReposo(id);
+
+        const resultado = await eliminarLugaresReposo(id)
         if (!resultado.success) {
             return res.status(400).json({
                 status: 400,
@@ -142,10 +143,10 @@ export const eliminarTiposReposoController = async (req, res) => {
             message: resultado.message
         });
     } catch (error) {
-        console.log("Error al eliminar tipo de reposo:", error);
+        console.log("Error al eliminar lugar de reposo:", error);
         res.status(500).json({
             status: 500,
-            message: "Error al eliminar tipo de reposo"
+            message: "Error al eliminar lugar de reposo"
         });
     }
 }

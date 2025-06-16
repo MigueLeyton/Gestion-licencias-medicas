@@ -1,24 +1,25 @@
-import { crearTiposReposo, obtenerTiposReposo, obtenerTiposReposoPorId, actualizarTiposReposo, eliminarTiposReposo } from "../models/tiposReposo.models.js";
+import { crearJornada, obtenerJornadas, obtenerJornadasPorId, actualizarJornada, eliminarJornada } from "../models/jornadas.models.js";
 
-export const crearTiposReposoController = async (req, res) => {
+export const crearJornadaController = async (req, res) => {
     try {
         const { nombre } = req.body;
 
         if (!nombre) {
             return res.status(400).json({
                 status: 400,
-                message: "El nombre del tipo de resposo es obligatorio"
+                message: "El nombre de la jornada es obligatorio"
             });
         }
 
-        const nuevoTipoReposo = {
+        const jornada = {
             nombre
         };
 
-        const resultado = await crearTiposReposo(nuevoTipoReposo);
+        const resultado = await crearJornada(jornada);
+
         if (!resultado.success) {
             return res.status(400).json({
-                status: 400, 
+                status: 400,
                 message: resultado.message
             });
         }
@@ -26,50 +27,51 @@ export const crearTiposReposoController = async (req, res) => {
             status: 201,
             message: resultado.message
         });
-    }catch (error) {
-        console.log("Error al crear tipo de reposo:", error);
+    } catch (error) {
+        console.log("Error al crear jornada:", error);
         res.status(500).json({
             status: 500,
-            message: "Error al crear tipo de resposo"
+            message: "Error al crear la jornada"
         });
     }
 }
 
-export const obtenerTiposReposoController = async (req, res) => {
+export const obtenerJornadasController = async (req, res) => {
     try {
-        const resultado = await obtenerTiposReposo();
+        const resultado = await obtenerJornadas();
 
         if (!resultado.success) {
             return res.status(400).json({
-                status: 400,
+                status: 400, 
                 message: resultado.message
             });
-        }
+        } 
         return res.status(200).json({
             status: 200,
-            data: resultado.tipoReposo
+            data: resultado.jornadas
         });
+
     } catch (error) {
-        console.log("Error al obtener tipos de resposo:", error);
+        console.log("Error al obtener jornadas:", error)
         res.status(500).json({
             status: 500,
-            message: "Error la obtener tipos de resposo"
+            message: "Error al obtener jornadas"
         });
     }
 }
 
-export const obtenerTiposReposoPorIdController = async (req, res) => {
+export const obtenerJornadasPorIdController = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
 
         if (!id) {
             return res.status(400).json({
                 status: 400,
-                message: "El ID del tipo de reposo es obligatorio"
+                message: "El ID de la jornada es obligatorio"
             });
         }
 
-        const resultado = await obtenerTiposReposoPorId(id);
+        const resultado = await obtenerJornadasPorId(id);
 
         if (!resultado.success) {
             return res.status(400).json({
@@ -79,28 +81,28 @@ export const obtenerTiposReposoPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
-            data: resultado.tipoReposo
+            data: resultado.jornada
         });
-    }catch (error) {
-        console.log("Error al obtener tipo de reposo por ID:", error);
+    } catch (error) {
+        console.log("Error al obtener jornada por ID:", error);
         res.status(500).json({
             status: 500,
-            message: "Error al obtener tipo de reposo por ID"
+            message: "Error al obtener jornada por ID",
         });
     }
 }
 
-export const actualizarTiposReposoController = async (req, res) => {
+export const actualizarJornadasController = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const { nombre } = req.body;
 
-        const tipoReposoActualizado = {
+        const jornadaActualizada = {
             nombre
-        }
+        };
 
-        const resultado = await actualizarTiposReposo(id, tipoReposoActualizado);
-        
+        const resultado = await actualizarJornada(id, jornadaActualizada);
+
         if (!resultado.success) {
             return res.status(400).json({
                 status: 400,
@@ -111,26 +113,27 @@ export const actualizarTiposReposoController = async (req, res) => {
             status: 200,
             message: resultado.message
         });
+
     } catch (error) {
-        console.log("Error al actualizar tipo de reposo:", error);
+        console.log("Error al actualizar la jornada:", error);
         res.status(500).json({
             status: 500,
-            message: "Error al actualizar tipo de resposo"
+            message: "Error al actualizar la jornada",
         });
     }
 }
 
-export const eliminarTiposReposoController = async (req, res) => {
+export const eliminarJornadaController = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         if (!id) {
             return res.status(400).json({
-                status : 400, 
-                message: "El ID del tipo de reposo es obligatorio"
+                status: 400,
+                message: "El ID de la jornada es obligatorio"
             });
         }
-        
-        const resultado = await eliminarTiposReposo(id);
+
+        const resultado = await eliminarJornada(id);
         if (!resultado.success) {
             return res.status(400).json({
                 status: 400,
@@ -138,14 +141,15 @@ export const eliminarTiposReposoController = async (req, res) => {
             });
         }
         return res.status(200).json({
-            status: 200,
+            status: 200, 
             message: resultado.message
         });
+
     } catch (error) {
-        console.log("Error al eliminar tipo de reposo:", error);
+        console.log("Error al eliminar la jornada: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al eliminar tipo de reposo"
+            message: "Error al eliminar la jornada"
         });
     }
 }

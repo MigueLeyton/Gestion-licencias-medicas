@@ -138,7 +138,6 @@ export const actualizarTrabajadorController = async (req, res) => {
 export const eliminarTrabajadorController = async (req, res) => {
     try {
         const { id } = req.params;
-
         if (!id) {
             return res.status(400).json({
                 status: 400,

@@ -9,6 +9,10 @@ import hijosRoutes from './routes/hijos.routes.js';
 import profesionalesRoutes from './routes/profesionales.routes.js'; 
 import SesionsRoutes from './routes/sesions.routes.js';
 import tiposReposoRoutes from './routes/tiposReposo.routes.js';
+import lugaresReposoRouter from './routes/lugaresReposo.routes.js';
+import jornadasRouter from './routes/jornadas.routes.js';
+import afpRoutes from './routes/afp.routes.js';
+import licenciaMutualRouter from './routes/licenciaMutual.routes.js';
 
 const app = express(); 
 
@@ -26,6 +30,10 @@ app.use("/api", hijosRoutes);
 app.use("/api", profesionalesRoutes); 
 app.use("/api", SesionsRoutes);
 app.use("/api", tiposReposoRoutes);
+app.use("/api", lugaresReposoRouter);
+app.use("/api", jornadasRouter);
+app.use("/api", afpRoutes);
+app.use("/api", licenciaMutualRouter);
 
 app.listen(PORT, () => { 
     console.log(`Servidor corriendo en el puerto ${PORT}`); 
