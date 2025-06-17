@@ -6,7 +6,7 @@ import { verificarTokenMiddleware } from "../middlewares/verificarToken.js";
 const router = Router();
 
 // Crear licencia
-router.post("/licencias", verificarTokenMiddleware, validarLicenciaMiddleware, CrearLicenciaController);
+router.post("/licencias",  CrearLicenciaController);
 
 // Obtener licencias pendientes
 router.get("/licencias/pendientes", verificarTokenMiddleware, ObtenerLicenciasPendientesController);

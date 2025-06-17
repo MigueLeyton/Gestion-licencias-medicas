@@ -122,8 +122,8 @@ export const eliminarHijoController = async (req, res) => {
 
         const resultado = await eliminarHijo(id);
         if (!resultado.success) {
-            return res.status(400).json({
-                status: 400,
+            return res.status(404).json({
+                status: 404,
                 message: resultado.message
             });
         }

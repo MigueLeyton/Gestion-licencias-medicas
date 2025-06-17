@@ -1,79 +1,79 @@
-import { crearJornada, obtenerJornadas, obtenerJornadasPorId, actualizarJornada, eliminarJornada } from "../models/jornadas.models.js";
+import { crearEstadosLicencia, obtenerEstadosLicencia, obtenerEstadosLicenciaPorId, actualizarEstadosLicencia, eliminarEstadosLicencia } from "../models/estadosLicencia.models.js";
 
-export const crearJornadaController = async (req, res) => {
+export const crearEstadoLicenciaController = async (req, res) => {
     try {
         const { nombre } = req.body;
 
         if (!nombre) {
             return res.status(400).json({
                 status: 400,
-                message: "El nombre de la jornada es obligatorio"
+                message: "El estado de licencia es obligatorio"
             });
         }
 
-        const jornada = {
+        const nuevoEstadoLicencia = {
             nombre
         };
 
-        const resultado = await crearJornada(jornada);
-
+        const resultado = await crearEstadosLicencia(nuevoEstadoLicencia);
+        
         if (!resultado.success) {
             return res.status(400).json({
                 status: 400,
                 message: resultado.message
             });
         }
-        return res.status(201).json({
+        res.status(201).json({
             status: 201,
-            message: resultado.message
+            message: "Estado de licencia creado exitosamente",
+            data: resultado.estadoLicencia
         });
     } catch (error) {
-        console.log("Error al crear jornada:", error);
+        console.log("Error al crear estado de licencia: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al crear la jornada"
+            message: "Error al crear estado de licencia"
         });
     }
 }
 
-export const obtenerJornadasController = async (req, res) => {
+export const obtenerEstadosLicenciaController = async (req, res) => {
     try {
-        const resultado = await obtenerJornadas();
-
+        const resultado = await obtenerEstadosLicencia();
+        
         if (!resultado.success) {
             return res.status(400).json({
-                status: 400, 
+                status: 400,
                 message: resultado.message
             });
-        } 
+        }
         return res.status(200).json({
             status: 200,
-            data: resultado.jornadas
+            data: resultado.estadoLicencia
         });
-
     } catch (error) {
-        console.log("Error al obtener jornadas:", error)
+        console.log("Error al obtener los estados de licencia: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al obtener jornadas"
+            message: "Error al obtener los estados de liencia"
         });
     }
 }
 
-export const obtenerJornadasPorIdController = async (req, res) => {
+export const obtenerEstadoLicenciaPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
 
         if (!id) {
             return res.status(400).json({
                 status: 400,
-                message: "El ID de la jornada es obligatorio"
+                message: "El ID del estado de licencia es obligatorio"
             });
         }
 
-        const resultado = await obtenerJornadasPorId(id);
+        const resultado = await obtenerEstadosLicenciaPorId(id);
 
-        if (!resultado.success) {
+        if (!resultado.success){
             return res.status(404).json({
                 status: 404,
                 message: resultado.message
@@ -81,29 +81,27 @@ export const obtenerJornadasPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
-            data: resultado.jornada
+            data: resultado.estadoLicencia
         });
     } catch (error) {
-        console.log("Error al obtener jornada por ID:", error);
+        console.log("Error al obtener el estado de licencias: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al obtener jornada por ID",
+            message: "Error al obtener el estado de licencia"
         });
     }
 }
 
-export const actualizarJornadasController = async (req, res) => {
+export const actualizarEstadoLicenciaController = async (req, res) => {
     try {
         const { id } = req.params;
         const { nombre } = req.body;
-
-        const jornadaActualizada = {
+        const estadoLicenciaActualizado = {
             nombre
         };
+        const resultado = await actualizarEstadosLicencia(id, estadoLicenciaActualizado);
 
-        const resultado = await actualizarJornada(id, jornadaActualizada);
-
-        if (!resultado.success) {
+        if (!resultado.success){
             return res.status(400).json({
                 status: 400,
                 message: resultado.message
@@ -113,28 +111,28 @@ export const actualizarJornadasController = async (req, res) => {
             status: 200,
             message: resultado.message
         });
-
     } catch (error) {
-        console.log("Error al actualizar la jornada:", error);
+        console.log("Error al actualizar el estado de licencia: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al actualizar la jornada",
-        });
+            message: "Error al actualizar el estado de licencia"
+        })
     }
 }
 
-export const eliminarJornadaController = async (req, res) => {
+export const eliminarEstadoLicenciaController = async (req, res) => {
     try {
         const { id } = req.params;
+
         if (!id) {
             return res.status(400).json({
                 status: 400,
-                message: "El ID de la jornada es obligatorio"
+                message: "El ID del estado de licencia es obligatorio"
             });
         }
 
-        const resultado = await eliminarJornada(id);
-        
+        const resultado = await eliminarEstadosLicencia(id);
+
         if (!resultado.success) {
             return res.status(404).json({
                 status: 404,
@@ -142,15 +140,14 @@ export const eliminarJornadaController = async (req, res) => {
             });
         }
         return res.status(200).json({
-            status: 200, 
+            status: 200,
             message: resultado.message
         });
-
     } catch (error) {
-        console.log("Error al eliminar la jornada: ", error);
+        console.log("Error al eliminar el estado de licencia: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al eliminar la jornada"
-        });
+            message: "Error al eliminar el estado de licncia"
+        })
     }
 }

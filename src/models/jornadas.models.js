@@ -85,7 +85,6 @@ export const actualizarJornada = async (id, jornada) => {
         const { nombre } = jornada;
         const query = "UPDATE jornadas SET nombre = ? WHERE id = ? AND eliminado != 1";
         const values = [nombre, id];
-
         const [result] = await db.query(query, values);
 
         if (result.affectedRows > 0) {

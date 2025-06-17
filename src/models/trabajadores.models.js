@@ -14,12 +14,11 @@ export const crearTrabajador = async (trabajador) => {
                 success: true,
                 message: "Trabajador creado exitosamente",
             };
-        }else{
-            return {
-                success: false,
-                message: "No se pudo crear el trabajador",
-            };
         }
+        return {
+            success: false,
+            message: "No se pudo crear el trabajador",
+        };
     } catch (error) {
         console.error("Error al crear trabajador:", error);
         return {
@@ -39,12 +38,11 @@ export const obtenerTrabajadores = async () => {
                 success: true,
                 trabajadores: result
             };
-        } else {
-            return {
-                success: false,
-                message: "No se encontraron trabajadores"
-            };
-        }
+        } 
+        return {
+            success: false,
+            message: "No se encontraron trabajadores"
+        };
     } catch (error) {
         console.error("Error al obtener trabajadores:", error);
         return {
@@ -58,7 +56,6 @@ export const obtenerTrabajadorPorId = async (id) => {
     try {
         const query = "SELECT id, rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible, tiene_hijos FROM trabajadores WHERE id = ? AND eliminado != 1";
         const values = [id];
-
         const [result] = await db.query(query, values);
 
         if (result.length > 0) {
@@ -66,12 +63,11 @@ export const obtenerTrabajadorPorId = async (id) => {
                 success: true,
                 trabajador: result[0]
             };
-        } else {
-            return {
-                success: false,
-                message: "Trabajador no encontrado"
-            };
-        }
+        } 
+        return {
+            success: false,
+            message: "Trabajador no encontrado o ya eliminado"
+        };
     } catch (error) {
         console.error("Error al obtener trabajador por ID:", error);
         return {
@@ -148,7 +144,6 @@ export const eliminarTrabajador = async (id) => {
     try {
         const query = "UPDATE trabajadores SET eliminado = 1 WHERE id = ?";
         const values = [id];
-
         const [result] = await db.query(query, values);
 
         if(result.affectedRows > 0) {

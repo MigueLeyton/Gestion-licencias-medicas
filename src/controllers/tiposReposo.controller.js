@@ -72,8 +72,8 @@ export const obtenerTiposReposoPorIdController = async (req, res) => {
         const resultado = await obtenerTiposReposoPorId(id);
 
         if (!resultado.success) {
-            return res.status(400).json({
-                status: 400,
+            return res.status(404).json({
+                status: 404,
                 message: resultado.message
             });
         }
@@ -132,8 +132,8 @@ export const eliminarTiposReposoController = async (req, res) => {
         
         const resultado = await eliminarTiposReposo(id);
         if (!resultado.success) {
-            return res.status(400).json({
-                status: 400,
+            return res.status(404).json({
+                status: 404,
                 message: resultado.message
             });
         }

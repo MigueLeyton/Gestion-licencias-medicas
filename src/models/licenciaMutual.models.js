@@ -93,7 +93,7 @@ export const actualizarLicenciaMutual = async (id, licenciaMutual) => {
         if (fecha_compin) {
             query += (query.includes("SET") ? ", " : " SET ") + "fecha_compin = ?";
         }
-        query += " WHERE id = ?";
+        query += " WHERE id = ? AND eliminado != 1";
 
         const values = [
             licencia_id, 

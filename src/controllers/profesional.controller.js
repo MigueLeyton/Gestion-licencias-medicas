@@ -80,8 +80,8 @@ export const obtenerProfesionalesPorIdController = async (req, res) => {
         const resultado = await obtenerProfesionalesPorId(id);
 
         if (!resultado.success) {
-            return res.status(400).json({
-                status: 400,
+            return res.status(404).json({
+                status: 404,
                 message: resultado.message
             });
         }
@@ -146,8 +146,8 @@ export const eliminarProfesionalContoller = async (req, res) => {
 
         const resultado = await eliminarProfesinal(id);
         if (!resultado.success) {
-            return res.status(400).json({
-                status: 400,
+            return res.status(404).json({
+                status: 404,
                 message: resultado.message
             });
         }

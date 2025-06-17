@@ -1,3 +1,5 @@
+// Debo evaluarlo y ver si me servirá o no
+
 import { guardarLicenciaEnDB, obtenerLicenciasPendientes, actualizarEstadoLicencia } from "../models/dbLicencias.js";
 import { validarLicencia } from "../utils/validacionesLicencia.js";
 import { calcularDatosLicencia } from "../utils/calculoLicencia.js";

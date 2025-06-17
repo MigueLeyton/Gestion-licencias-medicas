@@ -1,24 +1,23 @@
-import { crearLicenciaMutual, obtenerLicenciaMutual, obtenerLicenciaMutualPorId, actualizarLicenciaMutual, eliminarLicenciaMutual } from "../models/licenciaMutual.models.js";
+import { crearLicenciaExtension, obtenerLicenciaExtension, obtenerLicenciaExtensionPorId, actualizarLicenciaExtension, eliminarLicenciaExtension } from "../models/licenciaExtension.models.js";
 
-export const crearLicenciaMutualController = async (req, res) => {
+export const crearLicenciaExtensionController = async (req, res) => {
     try {
-        const { licencia_id, mutual, institucion_mutual, fecha_compin } = req.body;
+        const { licencia_id, es_extension, licencia_relacionada } = req.body;
 
-        if (!licencia_id || !mutual || !institucion_mutual || !fecha_compin) {
+        if (!licencia_id || !es_extension || !licencia_relacionada) {
             return res.status(400).json({
                 status: 400,
                 message: "Todos los campos son obligatorios"
             });
         }
 
-        const nuevaLicenciaMutual = {
+        const licenciaExtension = {
             licencia_id,
-            mutual,
-            institucion_mutual,
-            fecha_compin
+            es_extension,
+            licencia_relacionada
         };
 
-        const resultado = await crearLicenciaMutual(nuevaLicenciaMutual);
+        const resultado = await crearLicenciaExtension(licenciaExtension);
 
         if (!resultado.success) {
             return res.status(400).json({
@@ -27,21 +26,21 @@ export const crearLicenciaMutualController = async (req, res) => {
             });
         }
         return res.status(201).json({
-            status: 201,
+            status: 201, 
             message: resultado.message
         });
     } catch (error) {
-        console.log("Error al crear la licencia mutual:", error);
+        console.log("Error al crear la licencia de extendión: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al crear la licencia mutual"
+            message: "Error al crear la licencia de extensión"
         });
     }
 }
 
-export const obtenerLicenciaMutualController = async (req, res) => {
+export const obtenerLicenciaExtensionController = async (req, res) => {
     try {
-        const resultado = await obtenerLicenciaMutual();
+        const resultado = await obtenerLicenciaExtension();
 
         if (!resultado.success) {
             return res.status(400).json({
@@ -51,31 +50,31 @@ export const obtenerLicenciaMutualController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
-            data: resultado.licenciaMutual
+            data: resultado.licenciaExtension
         });
     } catch (error) {
-        console.log("Erro al obtener las licencas mutuales: ", error);
+        console.log("Error al obtener las licencias de extensión: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al obtener las licencias mutuales"
+            message: "Error al obtener las licencias de extensión"
         });
     }
 }
 
-export const obtenerLicenciaMutualPorIdController = async (req, res) => {
+export const obtenerLicenciaExtensionPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
-        
+
         if (!id) {
             return res.status(400).json({
                 status: 400,
-                message: "El ID de a licencia mutual es obligatorio"
+                message: "El ID de la licencia de extensión es obligatorio"
             });
         }
+        
+        const resultado = await obtenerLicenciaExtensionPorId(id);
 
-        const resultado = await obtenerLicenciaMutualPorId(id);
-
-        if (!resultado.success) {
+        if (!resultado.success > 0) {
             return res.status(400).json({
                 status: 400,
                 message: resultado.message
@@ -83,36 +82,36 @@ export const obtenerLicenciaMutualPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
-            data: resultado.licenciaMutual
+            data: resultado.licenciaExtension
         });
     } catch (error) {
-        console.loh("Error al obtener la licencua mutual por ID: ", error);
+        console.log("Error al obtener la licencia de extensión por ID: ", error);
         res.status(500).json({
-            message: "Error al obtener la licencia mutual por ID"
+            status: 500,
+            message: "Error al obtener la licencia de extensión por ID"
         });
     }
 }
 
-export const actualizadarLicenciaMutualController = async (req, res) => {
+export const actualizarLicenciaExtensionController = async (req, res) => {
     try {
         const { id } = req.params;
-        const { licencia_id, mutual, institucion_mutual, fecha_compin } = req.body;
+        const { licencia_id, es_extension, licencia_relacionada } = req.body;
 
-        if (!id || !licencia_id || !mutual || !institucion_mutual || !fecha_compin) {
+        if (!id || !licencia_id || es_extension || !licencia_relacionada) {
             return res.status(400).json({
                 status: 400,
                 message: "Todos los campos son obligatorios"
             });
         }
 
-        const licenciaMutual = {
+        const licenciaExtension = {
             licencia_id,
-            mutual,
-            institucion_mutual,
-            fecha_compin
+            es_extension,
+            licencia_relacionada
         };
 
-        const resultado = await actualizarLicenciaMutual(id, licenciaMutual);
+        const resultado = await actualizarLicenciaExtension(id, licenciaExtension);
 
         if (!resultado.success) {
             return res.status(400).json({
@@ -125,26 +124,26 @@ export const actualizadarLicenciaMutualController = async (req, res) => {
             message: resultado.message
         });
     } catch (error) {
-        console.log("Error al actualizar la licencia mutual: ", error);
+        console.log("Error al actualizar la licencia de extensión: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al actualizar la licencia mutual"
+            message: "Error al actualizar la licencia de extensión"
         });
     }
 }
 
-export const eliminadarLicenciaMutualController = async (req, res) => {
+export const eliminarLicenciaExtensionController = async (req, res) => {
     try {
         const { id } = req.params;
 
         if (!id) {
             return res.status(400).json({
                 status: 400,
-                message: "El ID de la licencia mutual es obligatorio"
+                message: "El ID de la licencia de extensión es obligatorio"
             });
         }
 
-        const resultado = await eliminarLicenciaMutual(id);
+        const resultado = await eliminarLicenciaExtension(id);
 
         if (!resultado.success) {
             return res.status(400).json({
@@ -157,10 +156,10 @@ export const eliminadarLicenciaMutualController = async (req, res) => {
             message: resultado.message
         });
     } catch (error) {
-        console.log("Error al eliminar la licencia mutual: ", error);
+        console.log("Error al eliminar la licencia de extensión: ", error);
         res.status(500).json({
             status: 500,
-            message: "Error al eliminar ela licencia mutual"
+            message: "Error al eliminar la licencia de extensión"
         });
     }
 }

@@ -32,7 +32,7 @@ export const crearTrabajadorController = async (req, res) => {
 
         return res.status(201).json({   
                 status: 201,
-                message: resultado.message,
+                message: resultado.message
             });
 
     } catch (error) {
@@ -80,7 +80,7 @@ export const obtenerTrabajadorPorIdController = async (req, res) => {
 
         const resultado = await obtenerTrabajadorPorId(id);
 
-        if(!resultado.success){
+        if (!resultado.success){
             return res.status(404).json({
                 status: 404,
                 message: resultado.message

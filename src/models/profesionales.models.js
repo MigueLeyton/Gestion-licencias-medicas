@@ -11,12 +11,12 @@ export const crearProfesional = async (profesionales) => {
         if(result.affectedRows > 0) {
             return {
                 success: true,
-                message: "Profesional creado exitosamente",
+                message: "Profesional creado exitosamente"
             };
         } 
         return {
             success: false,
-            message: "No se pudo crear el profesional",
+            message: "No se pudo crear el profesional"
         };
         
     } catch (error) {
@@ -41,10 +41,9 @@ export const obtenerProfesionales = async () => {
         } 
         return {
             success: false, 
-            message: "No se encontraron profesionales"
+            message: "No se encontraron profesionales registrados"
         };       
     }
-    
     catch (error) {
         console.error("Error al obtener profesionales:", error);
         return {
@@ -69,7 +68,7 @@ export const obtenerProfesionalesPorId = async (id) => {
         } else {
             return {
                 success: false,
-                message: "No se encontró el profesional"
+                message: "No se encontró el profesional con el ID proporcionado"
             };
         }
     } catch (error) {
@@ -151,8 +150,8 @@ export const eliminarProfesinal = async (id) => {
     try {
         const query = "UPDATE profesionales SET eliminado = 1 WHERE id = ?";
         const values = [id];
-
         const [result] = await db.query(query, values);
+        
         if(result.affectedRows > 0) {
             return {
                 success: true,
