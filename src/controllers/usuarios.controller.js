@@ -25,10 +25,10 @@ export const crearUsuarioController = async (req, res) => {
             message: nuevoUsuario.message }
         );
     } catch (error) {
-        console.log("Error en el controlador", error);
+        console.log("Error al crear el usuario", error);
         return res.status(500).json({ 
             status: 500, 
-            message: "Error en el servidor",}
+            message: "Error al crear el usuario",}
         );   
     }
 }
@@ -42,10 +42,10 @@ export const obtenerUsuariosController = async (req, res) => {
             message: usuarios.message, 
             data: usuarios.data });
     } catch (error) {
-        console.log("Error en el controlador", error);
+        console.log("Error al obtener usuarios", error);
         return res.status(500).json({ 
             status: 500, 
-            message: "Error en el servidor",}
+            message: "Error al obtener usuarios",}
         );
     }
 }
@@ -57,7 +57,7 @@ export const obtenerUsuarioPorIdController = async (req, res) => {
         if (isNaN(id) || !id) {
             return res.status(400).json({ 
                 status: 400, 
-                message: "El id no es válido", }
+                message: "El ID del usuario no es válido", }
             );
         }
 
@@ -69,10 +69,10 @@ export const obtenerUsuarioPorIdController = async (req, res) => {
             data: usuario.data }
         );
     } catch (error) {
-        console.log("Error en el controlador", error);
+        console.log("Error al obtener el usuario por ID", error);
         return res.status(500).json({ 
             status: 500, 
-            message: "Error en el servidor",}
+            message: "Error al obtener el usuario por ID",}
         );   
     }
 }
@@ -82,19 +82,6 @@ export const actualizarUsuarioController = async (req, res) => {
         const id = req.params.id;
         const { nombre, correo, password_hash, fecha_nacimiento, rol } = req.body;
 
-        if (isNaN(id) || !id) {
-            return res.status(400).json({ 
-                status: 400, 
-                message: "El id no es válido", }
-            );
-        }
-
-        if (!nombre || !correo || !password_hash || !fecha_nacimiento || !rol) {
-            return res.status(400).json({ 
-                status: 400, 
-                message: "Los datos no son válidos", }
-            );
-        }
         const usuario = {
             nombre,
             email: correo,
@@ -111,10 +98,10 @@ export const actualizarUsuarioController = async (req, res) => {
             data: usuarioActualizado.data }
         );
     } catch (error) {
-        console.log("Error en el controlador", error);
+        console.log("Error al actualiar datos del usuario", error);
         return res.status(500).json({ 
             status: 500, 
-            message: "Error en el servidor",}
+            message: "Error al actualiar datos del usuario",}
         );
     }
 }
@@ -125,7 +112,7 @@ export const eliminarUsuarioController = async (req, res) => {
         if (isNaN(id) || !id) {
             return res.status(400).json({ 
                 status: 400, 
-                message: "El id no es válido", }
+                message: "El ID no es válido", }
             );
         }
 

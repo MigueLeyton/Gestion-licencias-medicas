@@ -86,12 +86,12 @@ export const actualizarEstadosLicencia = async (id, estadoLicencia) => {
         if (result.affectedRows > 0) {
             return {
                 success: true, 
-                message: "Estados de licencia actuaiados exitosamente",
+                message: "Estados de licencia actualizados exitosamente",
             };
         }
         return {
             success: false,
-            message: "No se pudp actualizar el estado de licencia",
+            message: "No se pudo actualizar el estado de licencia",
         };
     } catch (error) {
         console.log("Error al actualizar estado de licencia: ", error);

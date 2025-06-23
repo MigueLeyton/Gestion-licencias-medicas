@@ -16,7 +16,7 @@ export const crearUsuario = async (users) => {
         }; 
     }
     catch (error) {
-        console.log("Error en el model: ", error); 
+        console.log("Error al crear el usuario ", error); 
         return {
             status: 500, 
             message: error
@@ -41,7 +41,7 @@ export const obtenerUsuarios = async () => {
         }; 
 
     } catch (error) {
-        console.log("Error en el model: ", error); 
+        console.log("Error al obtener usuarios: ", error); 
         return {
             status: 500, 
             message: error
@@ -68,7 +68,7 @@ export const obtenerUsuarioPorId = async (id) => {
         }; 
 
     } catch (error) {
-        console.log("Error en el model: ", error); 
+        console.log("Error al obtener el usuario por ID: ", error); 
         return {
             status: 500, 
             message: error
@@ -89,7 +89,7 @@ export const actualizarUsuario = async (id, users) => {
         };
     }
     catch (error) {
-        console.log("Error en el model: ", error); 
+        console.log("Error al actualizar datos del usuario: ", error); 
         return {
             status: 500, 
             message: error
@@ -106,7 +106,7 @@ export const eliminarUsuario = async (id) => {
         if(rows.affectedRows === 0) {
             return {
                 status: 404, 
-                message: "Usuario no encontrado"
+                message: "Usuario no eliminado, no existe o ya ha sido eliminado"
             }; 
         } 
         return {
@@ -114,7 +114,7 @@ export const eliminarUsuario = async (id) => {
             message: "Usuario eliminado correctamente"
         }; 
     } catch (error) {
-        console.log("Error en el model: ", error); 
+        console.log("Error al eliminar el usuario: ", error); 
         return {
             status: 500, 
             message: error

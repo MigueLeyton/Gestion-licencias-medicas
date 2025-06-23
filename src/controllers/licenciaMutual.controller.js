@@ -51,6 +51,7 @@ export const obtenerLicenciaMutualController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Licencias mutuales obtenidas correctamente",
             data: resultado.licenciaMutual
         });
     } catch (error) {
@@ -69,7 +70,7 @@ export const obtenerLicenciaMutualPorIdController = async (req, res) => {
         if (!id) {
             return res.status(400).json({
                 status: 400,
-                message: "El ID de a licencia mutual es obligatorio"
+                message: "El ID de la licencia mutual es obligatorio"
             });
         }
 
@@ -83,6 +84,7 @@ export const obtenerLicenciaMutualPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Licencia mutual obtenida correctamente",
             data: resultado.licenciaMutual
         });
     } catch (error) {
@@ -97,13 +99,6 @@ export const actualizadarLicenciaMutualController = async (req, res) => {
     try {
         const { id } = req.params;
         const { licencia_id, mutual, institucion_mutual, fecha_compin } = req.body;
-
-        if (!id || !licencia_id || !mutual || !institucion_mutual || !fecha_compin) {
-            return res.status(400).json({
-                status: 400,
-                message: "Todos los campos son obligatorios"
-            });
-        }
 
         const licenciaMutual = {
             licencia_id,

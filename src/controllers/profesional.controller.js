@@ -32,7 +32,7 @@ export const crearProfesionalController = async (req, res) => {
         }
         return res.status(201).json({
             status: 201,
-            message: resultado.message
+            message: resultado.message,
         }); 
     } catch (error) {
         console.log("Error al crear profesional:", error);
@@ -55,6 +55,7 @@ export const obtenerProfesionalesController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Datos obtenidos correctamente",
             data: resultado.profesionales
         });
     } catch (error) {
@@ -87,6 +88,7 @@ export const obtenerProfesionalesPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Datos obtenidos correctamente",
             data: resultado.profesionales
         });
     } catch (error) {

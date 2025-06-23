@@ -48,6 +48,7 @@ export const obtenerJornadasController = async (req, res) => {
         } 
         return res.status(200).json({
             status: 200,
+            message: "Jornadas obtenidas correctamente",
             data: resultado.jornadas
         });
 
@@ -81,6 +82,7 @@ export const obtenerJornadasPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Jornada obtenida correctamente",
             data: resultado.jornada
         });
     } catch (error) {

@@ -6,7 +6,7 @@ export const crearTiposLicenciaController = async (req, res) => {
         
         if (!nombre) {
             return res.status(400).json({
-                status: 500,
+                status: 400,
                 message: "EL nombre del tipo de licencia es obligatorio"
             });
         }
@@ -48,6 +48,7 @@ export const obtenerTiposLicenciaController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200, 
+            message: "Tipos de licencia obtenidos correctamente",
             data: resultado.tiposLicencia
         });
     } catch (error) {
@@ -80,6 +81,7 @@ export const obtenerTiposLicenciaPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Tipo de licencia obtenido correctamente",
             data: resultado.tiposLicencia
         });
     } catch (error) {

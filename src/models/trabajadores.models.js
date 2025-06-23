@@ -66,7 +66,7 @@ export const obtenerTrabajadorPorId = async (id) => {
         } 
         return {
             success: false,
-            message: "Trabajador no encontrado o ya eliminado"
+            message: "Trabajador no encontrado"
         };
     } catch (error) {
         console.error("Error al obtener trabajador por ID:", error);

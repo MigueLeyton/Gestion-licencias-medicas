@@ -5,11 +5,13 @@ import { generarToken } from "../utils/jwt.js";
 export const loginUsuario = async (email, password_hash) => {
     try {
      
-      const [rows] = await pool.query("SELECT * FROM users WHERE email = ? AND eliminado != 1", [email]);
+      const [rows] = await pool.query("SELECT email, password FROM users WHERE email = ? AND eliminado != 1", [email]);
   
      
       if (rows.length === 0) {
-        return { status: 404, message: "Usuario no encontrado" };
+        return { 
+          status: 404, 
+          message: "Usuario no encontrado" };
       }
   
       const usuario = rows[0];
@@ -17,7 +19,9 @@ export const loginUsuario = async (email, password_hash) => {
       const passwordValida = await bcrypt.compare(password_hash, usuario.password_hash);
   
       if (!passwordValida) {
-        return { status: 401, message: "Contraseña incorrecta" };
+        return { 
+          status: 401, 
+          message: "Contraseña incorrecta" };
       }
 
       const tokenUsuario = { id: usuario.id, email: usuario.email, rol: usuario.rol };

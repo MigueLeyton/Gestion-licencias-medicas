@@ -1,8 +1,9 @@
+import { loginUsuarioController, logoutUsuarioController } from "../controllers/sesions.controller.js";
 import { Router } from "express";
-import { loginUsuarioController } from "../controllers/sesions.controller.js";
 
 const router = Router();
 
 router.post('/login', loginUsuarioController);
+router. get('/login', logoutUsuarioController);
 
 export default router;

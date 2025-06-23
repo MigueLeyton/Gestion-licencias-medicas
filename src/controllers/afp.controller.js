@@ -45,6 +45,7 @@ export const obtenerAfpController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "AFP obtenidas correctamente",
             data: resultado.afp
         });
     } catch (error) {
@@ -75,6 +76,7 @@ export const obtenerAfpPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "AFP obtenida correctamente",
             data: resultado.afp
         });
 

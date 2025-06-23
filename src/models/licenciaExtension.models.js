@@ -31,7 +31,7 @@ export const obtenerLicenciaExtension = async () => {
         const query = "SELECT id, licencia_id, es_extension, licencia_relacionada FROM licencia_extension WHERE eliminado != 1";
         const [result] = await db.query(query);
 
-        if (result.lenght > 0) {
+        if (result.length > 0) {
             return {
                 success: true,
                 licenciaExtension: result
@@ -54,7 +54,7 @@ export const obtenerLicenciaExtensionPorId = async (id) => {
     try {
         const query = "SELECT id, licencia_id, es_extension, licencia_relacionada FROM licencia_extension WHERE id = ? AND eliminado != 1";
         const values = [id];
-        cosnt [result] = await db.query(query, values);
+        const [result] = await db.query(query, values);
 
         if (result.length > 0) {
             return {
@@ -64,7 +64,7 @@ export const obtenerLicenciaExtensionPorId = async (id) => {
         }
         return {
             success: false, 
-            message: "No se encontró l licencia de extensión con el ID proporcionado o la licencia ha sido eliminada",
+            message: "No se encontró la licencia de extensión con el ID proporcionado o la licencia ha sido eliminada",
         };
     } catch (error) {
         console.log("Error al obtener la licencia de extensión por ID: ", error);

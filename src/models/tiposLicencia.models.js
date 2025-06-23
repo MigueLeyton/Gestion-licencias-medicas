@@ -64,7 +64,7 @@ export const obtenerTiposLicenciaPorId = async (id) => {
         };
         return {
             success: false,
-            message: "No se encontró el tipo de licencia solicitado",
+            message: "No se encontró el tipo de licencia por ID",
         };
     } catch (error) {
         console.log("Error al obtener el tipo de licencia por ID: ", error);
@@ -85,7 +85,7 @@ export const actualizarTiposLicencia = async (id, tiposLicencia) => {
         if (result.affectedRows > 0) {
             return {
                 success: true,
-                message: "Tipo de licencia actualzado exitosamente",
+                message: "Tipo de licencia actualizado exitosamente",
             };
         }
         return {

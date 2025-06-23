@@ -93,6 +93,7 @@ export const obtenerLicenciaPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Licencia obtenida correctamente",
             data: resultado.licencia
         });
     } catch (error) {

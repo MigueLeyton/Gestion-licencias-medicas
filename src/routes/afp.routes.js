@@ -1,12 +1,13 @@
 import { crearAfpController, obtenerAfpController, obtenerAfpPorIdController, actualizarAfpController, eliminarAfpController } from "../controllers/afp.controller.js";
 import { Router } from "express";
+import { verificarTokenMiddleware } from "../middlewares/verificarToken.js";
 
 const router = Router();
 
-router.post("/afp", crearAfpController);
-router.get("/afp", obtenerAfpController);
-router.get("/afp/:id", obtenerAfpPorIdController);
-router.put("/afp/:id", actualizarAfpController);
-router.delete("/afp/:id", eliminarAfpController);
+router.post("/afp", verificarTokenMiddleware, crearAfpController);
+router.get("/afp", verificarTokenMiddleware, obtenerAfpController);
+router.get("/afp/:id", verificarTokenMiddleware, obtenerAfpPorIdController);
+router.put("/afp/:id", verificarTokenMiddleware, actualizarAfpController);
+router.delete("/afp/:id", verificarTokenMiddleware, eliminarAfpController);
 
 export default router;

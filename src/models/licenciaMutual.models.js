@@ -10,7 +10,7 @@ export const crearLicenciaMutual = async (licenciaMutual) => {
         if (result.affectedRows > 0 ) {
             return {
                 success: true,
-                message: "Licencia mutualcreada exitosamente",
+                message: "Licencia mutual creada exitosamente",
             };
         }
         return {
@@ -118,7 +118,7 @@ export const actualizarLicenciaMutual = async (id, licenciaMutual) => {
         console.log("Error al actualizar la licencia mutual: ", error);
         return {
             success: false,
-            message: "Error al actualzizar la licencia mutual",
+            message: "Error al actualizar la licencia mutual",
         };
     }
 }

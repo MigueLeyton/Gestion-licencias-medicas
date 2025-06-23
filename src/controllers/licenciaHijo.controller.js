@@ -49,7 +49,8 @@ export const obtenerLicenciaHijosController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
-            licenciasHijos: resultado.licenciasHijos
+            message: "Datos obtenidos correctamente",
+            data: resultado.licenciasHijos
         });
     } catch (error) {
         console.log("Error al obtener licencia de hijos: ", error);
@@ -80,7 +81,8 @@ export const obtenerLicenciaHijoPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
-            licenciaHijo: resultado.licenciaHijo
+            message: "Datos obtenidos correctamente",
+            data: resultado.licenciaHijo
         });        
     } catch (error) {
         console.log("Error al obtener licecnia de hijo por ID: ", error);
@@ -130,7 +132,7 @@ export const eliminarLicenciaHijoController = async (req, res) => {
         if (!id) {
             return res.status(400).json({
                 status: 400,
-                message: "El ID es obligatorio"
+                message: "El ID de la licencia de hijo es obligatorio"
             });
         }
 

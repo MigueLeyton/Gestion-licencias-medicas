@@ -56,6 +56,7 @@ export const obtenerTrabajadoresController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Datos obtenidos correctamente",
             data: resultado.trabajadores
         });
     } catch (error) {
@@ -88,6 +89,7 @@ export const obtenerTrabajadorPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Trabajador encontrado correctamente",
             data: resultado.trabajador
         });
     } catch (error) {

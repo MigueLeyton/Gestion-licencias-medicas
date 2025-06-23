@@ -12,3 +12,10 @@ export const loginUsuarioController = async (req, res) => {
     const resultado = await loginUsuario(email, password);
     return res.status(resultado.status).json(resultado);
 };
+
+export const logoutUsuarioController = (req, res) => {
+    return res.status(200).json({ 
+      status: 200, 
+      message: "Sesión cerrada exitosamente" }
+    );
+}

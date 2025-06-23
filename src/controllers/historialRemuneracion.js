@@ -6,7 +6,8 @@ export const crearHistorialRemuneracionController = async (req, res) => {
 
         if (!trabajador_id || !imponible || !liquido || ! fecha_actualizacion) {
             return res.status(400).json({
-                status: 400, message: "Todos los campos son obligatorios"
+                status: 400, 
+                message: "Todos los campos son obligatorios"
             });
         }
 
@@ -50,6 +51,7 @@ export const obtenerHistorialRemuneracionController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Historial de remuneración obtenido correctamente",
             data: resultado.historialRemuneracion
         });
     } catch (error) {
@@ -82,6 +84,7 @@ export const obtenerHistorialRemuneracionPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Historial de remuneración obtenido correctamente",
             data: resultado.historialRemuneracion
         });
     } catch (error) {

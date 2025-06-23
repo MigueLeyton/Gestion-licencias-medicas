@@ -62,6 +62,7 @@ export const obtenerHijosPorTrabajadorController = async (req, res) => {
         }
         res.status(200).json({
             status: 200,
+            message: "Hijos obtenidos exitosamente",
             data: resultado.hijos
         });
 

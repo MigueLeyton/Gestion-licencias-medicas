@@ -47,6 +47,7 @@ export const obtenerTiposReposoController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Tipos de reposo obtenidos correctamente",
             data: resultado.tipoReposo
         });
     } catch (error) {
@@ -79,6 +80,7 @@ export const obtenerTiposReposoPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Tipo de reposo obtenido correctamente",
             data: resultado.tipoReposo
         });
     }catch (error) {

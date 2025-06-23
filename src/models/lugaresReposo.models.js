@@ -31,7 +31,7 @@ export const crearLugaresReposo = async (lugarReposo) => {
 export const obtenerLugaresReposo = async () => {
     try {
         const query = "SELECT id, nombre FROM lugares_reposo WHERE eliminado != 1";
-        const [result] = await db.query(query, values);
+        const [result] = await db.query(query);
 
         if (result.length > 0) {
             return {
@@ -45,7 +45,7 @@ export const obtenerLugaresReposo = async () => {
         };
            
     } catch (error) {
-        console.log ("Error al obtener lugaresd de reposo:", error);
+        console.log ("Error al obtener lugares de reposo:", error);
         return {
             success: false,
             message: "Error al obtener lugares de reposo"
@@ -123,7 +123,7 @@ export const eliminarLugaresReposo = async (id) => {
         } 
         return {
             success: false,
-            message: "No se pudo eliminarl el lugar de reposo"
+            message: "No se pudo eliminar el lugar de reposo"
         };
         
     } catch (error) {

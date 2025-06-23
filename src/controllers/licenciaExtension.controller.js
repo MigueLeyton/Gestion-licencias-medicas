@@ -50,6 +50,7 @@ export const obtenerLicenciaExtensionController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Licencias de extensión obtenidas exitosamente",
             data: resultado.licenciaExtension
         });
     } catch (error) {
@@ -82,6 +83,7 @@ export const obtenerLicenciaExtensionPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Licencia de extensión obtenida exitosamente",
             data: resultado.licenciaExtension
         });
     } catch (error) {
@@ -97,14 +99,7 @@ export const actualizarLicenciaExtensionController = async (req, res) => {
     try {
         const { id } = req.params;
         const { licencia_id, es_extension, licencia_relacionada } = req.body;
-
-        if (!id || !licencia_id || es_extension || !licencia_relacionada) {
-            return res.status(400).json({
-                status: 400,
-                message: "Todos los campos son obligatorios"
-            });
-        }
-
+        
         const licenciaExtension = {
             licencia_id,
             es_extension,

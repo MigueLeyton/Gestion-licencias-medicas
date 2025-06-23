@@ -16,7 +16,7 @@ export const crearJornada = async (jornada) => {
         }
         return {
             success: false,
-            message: "No se pudp crear la jornada",
+            message: "No se pudo crear la jornada",
         };
         
     } catch (error) {

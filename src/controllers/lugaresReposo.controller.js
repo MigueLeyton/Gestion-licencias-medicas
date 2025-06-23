@@ -48,6 +48,7 @@ export const obtenerLugaresReposoController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Lugares de reposo obtenidos correctamente",
             data: resultado.lugarReposo
         });
     } catch (error) {
@@ -80,6 +81,7 @@ export const obtenerLugaresReposoPorIdController = async (req, res) => {
         }
         return res.status(200).json({
             status: 200,
+            message: "Lugar de reposo obtenido correctamente",
             data: resultado.lugarReposo
         });
     } catch (error) {

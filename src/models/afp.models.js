@@ -28,7 +28,7 @@ export const crearAfp = async (afp) => {
 
 export const obtenerAfp = async () => {
     try {
-        const query = "SELECT nombre, tasa, fecha_vigencia FROM afp WHERE eliminado != 1";
+        const query = "SELECT id, nombre, tasa, fecha_vigencia FROM afp WHERE eliminado != 1";
         const [result] = await db.query(query);
 
         if (result.length > 0) {
