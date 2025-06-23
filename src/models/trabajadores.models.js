@@ -12,6 +12,7 @@ export const crearTrabajador = async (trabajador) => {
         if(result.affectedRows > 0) {
             return {
                 success: true,
+                insertedId: result.insertId,
                 message: "Trabajador creado exitosamente",
             };
         }

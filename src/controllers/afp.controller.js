@@ -3,6 +3,7 @@ import { crearAfp, obtenerAfp, obtenerAfpPorId, actualizarAfp, eliminarAfp } fro
 export const crearAfpController = async (req, res) => {
     try {
         const { nombre, tasa, fecha_vigencia } = req.body;
+
         if (!nombre || !tasa || !fecha_vigencia) {
             return res.status(400).json({
                 status: 400,
@@ -15,6 +16,7 @@ export const crearAfpController = async (req, res) => {
             fecha_vigencia
         };
         const resultado = await crearAfp(afp);
+
         if (!resultado.success){
             return res.status(400).json({
                 status: 400,
@@ -36,16 +38,19 @@ export const crearAfpController = async (req, res) => {
 
 export const obtenerAfpController = async (req, res) => {
     try {
-        const resultado = await obtenerAfp();
+        const { fecha } = req.query;
+        const resultado = await obtenerAfp(fecha);
+
         if (!resultado.success) {
             return res.status(400).json({
                 status: 400,
                 message: resultado.message
             });
         }
+
         return res.status(200).json({
             status: 200,
-            message: "AFP obtenidas correctamente",
+            message: "AFP obtenida correctamente",
             data: resultado.afp
         });
     } catch (error) {

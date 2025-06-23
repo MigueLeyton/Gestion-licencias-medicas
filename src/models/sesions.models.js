@@ -5,7 +5,7 @@ import { generarToken } from "../utils/jwt.js";
 export const loginUsuario = async (email, password_hash) => {
     try {
      
-      const [rows] = await pool.query("SELECT email, password FROM users WHERE email = ? AND eliminado != 1", [email]);
+      const [rows] = await pool.query("SELECT email, password_hash FROM users WHERE email = ? AND eliminado != 1", [email]);
   
      
       if (rows.length === 0) {

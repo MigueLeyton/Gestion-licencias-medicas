@@ -1,4 +1,4 @@
-import { crearHistorialRemuneracion, obtenerHistorialRemuneracion, obtenerHistorialRemuneracionPorId, actualizarHistorialRemuneracion, eliminarHistorialRemuneracion } from "../models/historialRemuneracion.js";
+import { crearHistorialRemuneracion, obtenerHistorialRemuneracion, obtenerHistorialRemuneracionPorId, obtenerHistorialRemuneracionPorFecha, actualizarHistorialRemuneracion, eliminarHistorialRemuneracion } from "../models/historialRemuneracion.js";
 
 export const crearHistorialRemuneracionController = async (req, res) => {
     try {
@@ -93,6 +93,39 @@ export const obtenerHistorialRemuneracionPorIdController = async (req, res) => {
             status: 500,
             message: "Error al obtener historial de remuneración por ID"
         });
+    }
+}
+
+export const obtenerHistorialRemuneracionPorFechaController = async (req, res) => {
+    try {
+        const { trabajador_id, fecha } = req.query;
+
+        if (!trabajador_id || !fecha) {
+            return res.status(400).json({
+                status: 400,
+                message: "El ID del trabajador y la fecha son obligatorios"
+            });
+        }
+
+        const resultado = await obtenerHistorialRemuneracionPorFecha(trabajador_id, fecha);
+        
+        if (!resultado.success) {
+            return res.status(404).json({
+                status: 404,
+                message: resultado.message
+            });
+        }
+        return res.status(200).json({
+            status: 200,
+            message: "Historial de remuneración obtenido correctamente",
+            data: resultado.historialRemuneracion
+        });
+    } catch (error) {
+        console.log("Error al obtener historial de remuneración por trabajador y fecha: ", error);
+        res.status(500).json({
+            status: 500,
+            message: "Error al obtener historial de remuneración por trabajador y fecha"
+        }); 
     }
 }
 

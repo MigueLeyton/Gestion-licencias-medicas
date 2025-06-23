@@ -11,8 +11,8 @@ export const crearProfesional = async (profesionales) => {
         if(result.affectedRows > 0) {
             return {
                 success: true,
+                id: result.insertId,
                 message: "Profesional creado exitosamente",
-                id: result.insertId
             };
         } 
         return {

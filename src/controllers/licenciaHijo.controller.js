@@ -1,4 +1,4 @@
-import { crearLicenciaHijo, obtenerLicenciaHijos, obtenerLicenciaHijoPorId, actualizarLicenciaHijo, eliminarLicenciaHijo } from "../models/licenciaHijo.models.js";
+import { crearLicenciaHijo, obtenerLicenciaHijos, obtenerLicenciaHijoPorId, obtenerLicenciaHijoPorFecha, actualizarLicenciaHijo, eliminarLicenciaHijo } from "../models/licenciaHijo.models.js";
 
 export const crearLicenciaHijoController = async (req, res) => {
     try {
@@ -89,6 +89,39 @@ export const obtenerLicenciaHijoPorIdController = async (req, res) => {
         return res.status(500).json({
             status:500,
             message: "Error al obtener licencia de hijo por ID"
+        });
+    }
+}
+
+export const obtenerLicenciaHijoPorFechaController = async (req, res) => {
+    try {
+        const { fecha } = req.query;
+
+        if (!fecha) {
+            return res.status(400).json({
+                status: 400,
+                message: "La fecha es obligatoria"
+            });
+        }
+
+        const resultado = await obtenerLicenciaHijoPorFecha(fecha);
+
+        if (!resultado.success) {
+            return res.status(404).json({
+                status: 404,
+                message: resultado.message
+            });
+        }
+        return res.status(200).json({
+            status: 200,
+            message: "Datos obtenidos correctamente",
+            data: resultado.licenciaHijo
+        });
+    } catch (error) {
+        console.log("Error al obtener licencia de hijo por fecha: ", error);
+        return res.status(500).json({
+            status: 500,
+            message: "Error al obtener licencia de hijo por fecha"
         });
     }
 }

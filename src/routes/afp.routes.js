@@ -6,6 +6,7 @@ const router = Router();
 
 router.post("/afp", verificarTokenMiddleware, crearAfpController);
 router.get("/afp", verificarTokenMiddleware, obtenerAfpController);
+router.get("/afp/fecha", verificarTokenMiddleware, obtenerAfpController);
 router.get("/afp/:id", verificarTokenMiddleware, obtenerAfpPorIdController);
 router.put("/afp/:id", verificarTokenMiddleware, actualizarAfpController);
 router.delete("/afp/:id", verificarTokenMiddleware, eliminarAfpController);

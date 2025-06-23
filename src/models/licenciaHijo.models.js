@@ -75,6 +75,31 @@ export const obtenerLicenciaHijoPorId = async (id) => {
     }
 }
 
+export const obtenerLicenciaHijoPorFecha = async (fecha) => {
+    try {
+        const query = "SELECT id, licencia_id, hijo_id, fecha_concepcion FROM licencia_hijo WHERE fecha_concepcion = ? AND eliminado != 1";
+        const values = [fecha];
+        const [result] = await db.query(query, values);
+
+        if (result.length > 0) {
+            return {
+                success: true,
+                licenciaHijo: result[0]
+            }
+        }
+        return {
+            success: false,
+            message: "No se encontró la licencia de hijo con la fecha proporcionada"
+        };
+    } catch (error) {
+        console.log("Error al obtener licencia de hijo por fecha: ", error);
+        return {
+            success: false,
+            message: "Error al obtener licencia de hijo por fecha"
+        };
+    }
+}
+
 export const actualizarLicenciaHijo = async (id, licenciaHijo) => {
     try {
         const { licencia_id, hijo_id, fecha_concepcion } = licenciaHijo;

@@ -75,6 +75,31 @@ export const obtenerHistorialRemuneracionPorId = async (id) => {
     }
 }
 
+export const obtenerHistorialRemuneracionPorFecha = async (trabajador_id, fecha) => {
+    try {
+        const query = "SELECT id, trabajador_id, imponible, liquido, fecha_actualizacion FROM historial_remuneracion WHERE trabajador_id = ? AND fecha_actualizacion = ? AND eliminado != 1";
+        const values = [trabajador_id, fecha];
+        const [result] = await db.query(query, values);
+
+        if (result.length > 0) {
+            return {
+                success: true,
+                historialRemuneracion: result[0]
+            };
+        }
+        return {
+            success: false,
+            message: "No se encontró el historial de remuneración para el trabajador en la fecha especificada"
+        };
+    } catch (error) {
+        console.log("Error al obtener historial de remuneración por trabajador y fecha: ", error);
+        return {
+            success: false,
+            message: "Error al obtener historial de remuneración por trabajador y fecha"
+        };
+    }
+}
+
 export const actualizarHistorialRemuneracion = async (id, historialRemuneracion) => {
     try {
         const { trabajador_id, imponible, liquido, fecha_actualizacion } = historialRemuneracion;

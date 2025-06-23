@@ -75,6 +75,31 @@ export const obtenerLicenciaMutualPorId = async (id) => {
     }
 }
 
+export const obtenerLicenciaMutualPorFecha = async (fecha) => {
+    try {
+        const query = "SELECT id, licencia_id, mutual, institucion_mutual, fecha_compin FROM licencia_mutual WHERE fecha_compin = ? AND eliminado != 1";
+        const values = [fecha];
+        const [result] = await db.query(query, values);
+
+        if (result.length > 0) {
+            return {
+                success: true,
+                licenciaMutual: result
+            };
+        }
+        return {
+            success: false,
+            message: "No se encontraron licencias mutuales para la fecha especificada",
+        };
+    } catch (error) {
+        console.log("Error al obtener la licencia mutual por fecha: ", error);
+        return {
+            success: false,
+            message: "Error al obtener la licencia mutual por fecha"
+        }
+    }
+}
+
 export const actualizarLicenciaMutual = async (id, licenciaMutual) => {
     try {
         const { licencia_id, mutual, institucion_mutual, fecha_compin } = licenciaMutual;

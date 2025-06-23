@@ -1,4 +1,4 @@
-import { crearLicenciaMutual, obtenerLicenciaMutual, obtenerLicenciaMutualPorId, actualizarLicenciaMutual, eliminarLicenciaMutual } from "../models/licenciaMutual.models.js";
+import { crearLicenciaMutual, obtenerLicenciaMutual, obtenerLicenciaMutualPorId, obtenerLicenciaMutualPorFecha, actualizarLicenciaMutual, eliminarLicenciaMutual } from "../models/licenciaMutual.models.js";
 
 export const crearLicenciaMutualController = async (req, res) => {
     try {
@@ -92,6 +92,39 @@ export const obtenerLicenciaMutualPorIdController = async (req, res) => {
         res.status(500).json({
             message: "Error al obtener la licencia mutual por ID"
         });
+    }
+}
+
+export const obtenerLicenciaMutualPorFechaController = async (req, res) => {
+    try {
+        const { fecha } = req.body;
+
+        if (!fecha) {
+            return res.status(400).json({
+                status: 400,
+                message: "La fecha es obligatoria"
+            });
+        }
+
+        const resultado = await obtenerLicenciaMutualPorFecha(fecha);
+
+        if (!resultado.success) {
+            return res.status(400).json({
+                status: 400,
+                message: resultado.message
+            });
+        }
+        return res.status(200).json({
+            status: 200,
+            message: "Licencias mutuales obtenidas por fecha correctamente",
+            data: resultado.licenciaMutual
+        });
+    } catch (error) {
+        console.log("Error al obtener las licencias mutuales por fecha: ", error);
+        res.status(500).json({
+            status: 500,
+            message: "Error al obtener las licencias mutuales por fecha"
+        }); 
     }
 }
 

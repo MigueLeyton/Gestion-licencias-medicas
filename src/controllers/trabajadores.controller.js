@@ -32,6 +32,7 @@ export const crearTrabajadorController = async (req, res) => {
 
         return res.status(201).json({   
                 status: 201,
+                insertedId: resultado.insertedId,
                 message: resultado.message
             });
 
