@@ -22,7 +22,6 @@ export const verificarTokenMiddleware = (req, res, next) => {
             return res.status(401).json({ 
                 status: 401, 
                 message: "Token inválido o expirado", 
-                token: token
             });
         }
        

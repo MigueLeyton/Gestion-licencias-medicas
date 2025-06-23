@@ -39,7 +39,6 @@ export const crearAfp = async (afp) => {
     }
 }
 
-
 export const obtenerAfp = async (fecha = null) => {
     try {
         let query = "SELECT id, nombre, tasa, fecha_vigencia FROM afp WHERE eliminado != 1 AND MONTH(fecha_vigencia) = ? AND YEAR(fecha_vigencia) = ?";

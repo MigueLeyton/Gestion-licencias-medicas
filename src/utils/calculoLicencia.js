@@ -74,7 +74,7 @@ export function calcularDatosLicencia(formData) {
 // ValorDia y remuneracion imponible vienen de la base de datoss
 // Imponible diario debe venir de la cantidad de dias del mes actual
 // Si se calcula una licencia de meses anteriores, se debe cambiar la cantidad de dias del mes actual
-
+/*
  const tasasAFP = {
     Capital: 0.1144,
     Cuprum: 0.1144,
@@ -84,6 +84,7 @@ export function calcularDatosLicencia(formData) {
     Modelo: 0.1058,
     Uno: 0.1049,
   };
+  */
 
 export const calcularLicencia =  (datos) => {
   //Calcular los días del mes actual
@@ -126,8 +127,6 @@ export const calcularLicencia =  (datos) => {
     montoCCAF,
     totalRecuperacionLicencias: Math.round(totalRecuperacionLicencias)
   };
-
-
 }
 
 
@@ -174,8 +173,6 @@ const obtenerRemuneracion = async (idTrabajador) => {
   }else{
     throw new Error("Remuneración no encontrada para el trabajador especificado");
   }
-
-
 }
 
 const obtenerTasaAFP = async (idAFP, fechaEmision) => {
