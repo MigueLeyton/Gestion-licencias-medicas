@@ -63,7 +63,7 @@ export const obtenerHijosPorTrabajador = async (trabajador_id) => {
             };
         }
 
-        const query = "SELECT rut, nombres, apellido_paterno, apellido_materno, apellido_paterno, apellido_materno, fecha_nacimiento FROM hijos WHERE trabajador_id = ?";
+        const query = "SELECT id, rut, nombres, apellido_paterno, apellido_materno, apellido_paterno, apellido_materno, fecha_nacimiento FROM hijos WHERE trabajador_id = ?";
         const values = [trabajador_id];
 
         const [result] = await db.query(query, values);
@@ -124,7 +124,15 @@ export const actualizarHijo = async (id, hijo) => {
         }
         query += " WHERE id = ?";
 
-        const values = [trabajador_id, rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, id].filter(value => value !== undefined);
+        const values = [
+            trabajador_id, 
+            rut, 
+            nombres, 
+            apellido_paterno, 
+            apellido_materno, 
+            fecha_nacimiento, 
+            id
+        ].filter(value => value !== "" && value != undefined);
 
         const [result] = await db.query(query, values);
 

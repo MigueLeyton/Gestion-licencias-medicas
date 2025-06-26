@@ -1,4 +1,5 @@
 import { crearUsuario, obtenerUsuarioPorId, obtenerUsuarios, actualizarUsuario, eliminarUsuario } from "../models/usuarios.models.js";
+import { obtenerDatosUsuario } from "../utils/obtenerUsuario.js";
 
 export const crearUsuarioController = async (req, res) => {
     try {
@@ -7,8 +8,8 @@ export const crearUsuarioController = async (req, res) => {
         if (!nombre || !email || !password_hash || !fecha_nacimiento || !rol) {
             return res.status(400).json({ 
                 status: 400, 
-                message: "Los datos no son válidos", }
-            );
+                message: "Los datos no son válidos"
+            });
         }
         const usuario = {
             nombre,
@@ -18,87 +19,135 @@ export const crearUsuarioController = async (req, res) => {
             rol
         }
 
-        const nuevoUsuario = await crearUsuario(usuario);
-
-        return res.status(nuevoUsuario.status).json({ 
-            status: nuevoUsuario.status, 
-            message: nuevoUsuario.message }
-        );
+        const resultado = await crearUsuario(usuario);
+        if (!resultado.success) {
+            return res.status(400).json({ 
+                status: 400, 
+                message: resultado.message 
+            });
+        }
+        return res.status(201).json({ 
+            status: 201, 
+            message: resultado.message,
+            insertedId: resultado.insertedId
+        });
     } catch (error) {
         console.log("Error al crear el usuario", error);
         return res.status(500).json({ 
             status: 500, 
-            message: "Error al crear el usuario",}
+            message: "Error al crear el usuario"}
         );   
     }
 }
 
 export const obtenerUsuariosController = async (req, res) => {
     try {
-        const usuarios = await obtenerUsuarios();
+        const resultado = await obtenerUsuarios();
 
-        return res.status(usuarios.status).json({ 
-            status: usuarios.status, 
-            message: usuarios.message, 
-            data: usuarios.data });
+        if (!resultado.success) {
+            return res.status(400).json({ 
+                status: 400, 
+                message: resultado.message 
+            });
+        }
+        return res.status(200).json({ 
+            status: 200, 
+            message: "Usuarios obtenidos correctamente", 
+            data: resultado.usuarios 
+        });
     } catch (error) {
         console.log("Error al obtener usuarios", error);
         return res.status(500).json({ 
             status: 500, 
-            message: "Error al obtener usuarios",}
-        );
+            message: "Error al obtener usuarios"
+        });
     }
 }
 
 export const obtenerUsuarioPorIdController = async (req, res) => {
     try {
-        const id = req.params.id;
-
-        if (isNaN(id) || !id) {
+        const { id } = req.params;
+        
+        if (!id) {
             return res.status(400).json({ 
                 status: 400, 
-                message: "El ID del usuario no es válido", }
-            );
+                message: "El ID no es válido" 
+            });
         }
 
-        const usuario = await obtenerUsuarioPorId(id);
+        const resultado = await obtenerUsuarioPorId(id);
 
-        return res.status(usuario.status).json({ 
-            status: usuario.status, 
-            message: usuario.message, 
-            data: usuario.data }
-        );
+        if (!resultado.success) {
+            return res.status(404).json({ 
+                status: 404, 
+                message: resultado.message 
+            });
+        }
+        return res.status(200).json({ 
+            status: 200, 
+            message: "Usuario obtenido correctamente", 
+            data: resultado.usuario 
+        });
     } catch (error) {
         console.log("Error al obtener el usuario por ID", error);
         return res.status(500).json({ 
             status: 500, 
-            message: "Error al obtener el usuario por ID",}
-        );   
+            message: "Error al obtener el usuario por ID"
+        });   
     }
 }
 
 export const actualizarUsuarioController = async (req, res) => {
     try {
-        const id = req.params.id;
-        const { nombre, correo, password_hash, fecha_nacimiento, rol } = req.body;
+        const { id } = req.params;
+        const { nombre, email, password_hash, fecha_nacimiento} = req.body;
+        
+        const token = req.headers["authorization"]?.split(" ")[1]
+        const datosUsuario = await obtenerDatosUsuario(token)
+
+        let rol = ""
+        
+        if(datosUsuario.rol == "Administrador"){
+            rol = req.body.rol
+        }        
+
+        
+        if (!nombre && !email && !password_hash && !fecha_nacimiento && !rol) {
+            return res.status(400).json({ 
+            status: 400, 
+            message: "Los datos no son válidos"
+            });
+        }
 
         const usuario = {
             nombre,
-            email: correo,
+            email,
             password_hash,
             fecha_nacimiento,
             rol
         }
 
-        const usuarioActualizado = await actualizarUsuario(id, usuario);
+        
 
-        return res.status(usuarioActualizado.status).json({ 
-            status: usuarioActualizado.status, 
-            message: usuarioActualizado.message, 
-            data: usuarioActualizado.data }
-        );
+
+     
+
+
+     
+        const resultado = await actualizarUsuario(id, usuario);
+
+        if (!resultado.success) {
+            return res.status(400).json({ 
+                status: 400, 
+                message: resultado.message 
+            });
+        }
+        return res.status(200).json({ 
+            status: 200, 
+            message: resultado.message
+        });
     } catch (error) {
-        console.log("Error al actualiar datos del usuario", error);
+        console.log("Error al actualizar datos del usuario", error);
         return res.status(500).json({ 
             status: 500, 
             message: "Error al actualiar datos del usuario",}
@@ -108,20 +157,27 @@ export const actualizarUsuarioController = async (req, res) => {
 
 export const eliminarUsuarioController = async (req, res) => {
     try {
-        const id = req.params.id;
-        if (isNaN(id) || !id) {
+        const { id } = req.params;
+
+        if (!id) {
             return res.status(400).json({ 
                 status: 400, 
-                message: "El ID no es válido", }
-            );
+                message: "El ID no es válido" 
+            });
         }
 
-        const usuarioEliminado = await eliminarUsuario(id);
-        return res.status(usuarioEliminado.status).json({ 
-            status: usuarioEliminado.status, 
-            message: usuarioEliminado.message, 
-            data: usuarioEliminado.data }
-        );
+        const resultado = await eliminarUsuario(id);
+
+        if (!resultado.success) {
+            return res.status(404).json({ 
+                status: 404, 
+                message: resultado.message 
+            });
+        }
+        return res.status(200).json({ 
+            status: 200, 
+            message: "Usuario eliminado correctamente" 
+        });
     } catch (error) {
         console.log("Error en el controlador", error);
         return res.status(500).json({ 

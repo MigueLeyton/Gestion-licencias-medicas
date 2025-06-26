@@ -1,123 +1,166 @@
+import { pool as db } from "../database/database.js";
 import bcrypt from "bcryptjs"; 
-import { pool } from "../database/database.js"; 
 
 export const crearUsuario = async (users) => {
     try {  
         const { nombre, email, password_hash, fecha_nacimiento, rol } = users; 
-
         const salt = await bcrypt.genSalt(10); 
         const hashedPassword = await bcrypt.hash(password_hash, salt);
-
-        const [rows] = await pool.query("INSERT INTO users (nombre, email, password_hash, fecha_nacimiento, rol) VALUES (?, ?, ?, ?, ?)", [nombre, email, hashedPassword, fecha_nacimiento, rol]
-        );
+        const query = "INSERT INTO users (nombre, email, password_hash, fecha_nacimiento, rol) VALUES (?, ?, ?, ?, ?)";
+        const values = [nombre, email, hashedPassword, fecha_nacimiento, rol];
+        const [result] = await db.query(query, values);
+        
+        if (result.affectedRows > 0) {
+            return {
+                success: true,
+                insertedId: result.insertId,
+                message: "Usuario creado correctamente"
+            };
+        }
         return {
-            status: 201, 
-            message: "Usuario creado correctamente"
-        }; 
+            success: false,
+            message: "No se pudo crear el usuario"
+        }     
     }
     catch (error) {
         console.log("Error al crear el usuario ", error); 
         return {
-            status: 500, 
-            message: error
+            success: false, 
+            message: "error al crear el usuario"
         };
     }
 }
 
 export const obtenerUsuarios = async () => {
     try {
-        const [rows] = await pool.query("SELECT * FROM users WHERE eliminado != 1"); 
-    
-        if(rows.length === 0) {
+        const query = "SELECT id, nombre, email, fecha_nacimiento, rol FROM users WHERE eliminado != 1";
+        const [result] = await db.query(query);
+
+        if (result.length > 0) {
             return {
-                status: 404, 
-                message: "No se encontraron usuarios"
-            }; 
+                success: true,
+                usuarios: result
+            };
         }
         return {
-            status: 200, 
-            message: "Usuarios obtenidos correctamente", 
-            data: rows
-        }; 
+            success: false,
+            message: "No se encontraron usuarios"
+        };
 
     } catch (error) {
         console.log("Error al obtener usuarios: ", error); 
         return {
-            status: 500, 
-            message: error
+            success: false, 
+            message: "Error al obtener usuarios"
         };
     }
 }
 
 export const obtenerUsuarioPorId = async (id) => {
     try {
-        const idUsuario = id; 
+        const query = "SELECT id, nombre, email, fecha_nacimiento, rol FROM users WHERE id = ? AND eliminado != 1";
+        const values = [id];
+        const [result] = await db.query(query, values);
 
-        const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [idUsuario]); 
-  
-        if(rows.length === 0) {
+        if (result.length > 0) {
             return {
-                status: 404, 
-                message: "Usuario no encontrado"
+                success: true,
+                usuario: result[0]
             };
         }
         return {
-            status: 200, 
-            message: "Usuario obtenido correctamente", 
-            data: rows[0]
-        }; 
+            success: false,
+            message: "Usuario no encontrado o ya ha sido eliminado"
+        };
 
     } catch (error) {
         console.log("Error al obtener el usuario por ID: ", error); 
         return {
-            status: 500, 
+            success: false, 
             message: error
         };
     }
 }
 
-export const actualizarUsuario = async (id, users) => {
+export const actualizarUsuario = async (id, users, idPersonaLogueada) => {
     try {
         const { nombre, email, password_hash, fecha_nacimiento, rol } = users; 
         const salt = await bcrypt.genSalt(10); 
-        const hashedPassword = await bcrypt.hash(password_hash, salt);
-        const [rows] = await pool.query("UPDATE users SET nombre = ?, email = ?, password_hash = ?, fecha_nacimiento = ?, rol = ? WHERE id = ?", [nombre, email, hashedPassword, fecha_nacimiento, rol, id]
-        );
+        //const hashedPassword = await bcrypt.hash(password_hash, salt);
+        const hashedPassword = password_hash ? await bcrypt.hash(password_hash, salt) : null;
+
+
+        let query = "UPDATE users"
+
+        if (nombre) {
+            query += " SET nombre = ?";
+        }
+        if (email) {
+            query += (query.includes("SET") ? ", " : " SET ") + "email = ?";
+        }
+        if (password_hash) {
+            query += (query.includes("SET") ? ", " : " SET ") + "password_hash = ?";
+        }
+        if (fecha_nacimiento) {
+            query += (query.includes("SET") ? ", " : " SET ") + "fecha_nacimiento = ?";
+        }
+        if (rol) {
+            query += (query.includes("SET") ? ", " : " SET ") + "rol = ?";
+        }   
+        query += " WHERE id = ?";
+
+        const values = [
+            nombre, 
+            email, 
+            hashedPassword, 
+            fecha_nacimiento, 
+            rol, 
+            id
+        ].filter(value => value !== "" && value != undefined); // Filtrar valores nulos o vacíos
+           
+        const [result] = await db.query(query, values);
+
+        if (result.affectedRows > 0) {
+            return {
+                success: true,
+                message: "Usuario actualizado correctamente"
+            };
+        }
         return {
-            status: 200, 
-            message: "Usuario actualizado correctamente"
+            success: false, 
+            message: "Usuario no encontrado o ya ha sido eliminado"
         };
     }
     catch (error) {
         console.log("Error al actualizar datos del usuario: ", error); 
         return {
-            status: 500, 
-            message: error
+            success: false, 
+            message: "Error al actualizar datos del usuario"
         };
     }
 }
 
 export const eliminarUsuario = async (id) => {
     try {
-        const idUsuario = id;      
-        const [rows] = await pool.query("UPDATE users SET eliminado = 0 WHERE id = ?", [idUsuario]
-        );
-
-        if(rows.affectedRows === 0) {
+        const query = "UPDATE users SET eliminado = 1 WHERE id = ?";
+        const values = [id];
+        const [result] = await db.query(query, values);
+        
+        if (result.affectedRows > 0) {
             return {
-                status: 404, 
-                message: "Usuario no eliminado, no existe o ya ha sido eliminado"
-            }; 
-        } 
+                success: true,
+                message: "Usuario eliminado correctamente"
+            };
+        }
         return {
-            status: 200, 
-            message: "Usuario eliminado correctamente"
-        }; 
+            success: false,
+            message: "Usuario no encontrado o ya ha sido eliminado"
+        };
     } catch (error) {
         console.log("Error al eliminar el usuario: ", error); 
         return {
-            status: 500, 
-            message: error
+            success: false, 
+            message: "Error al eliminar el usuario"
         };       
     }
 }

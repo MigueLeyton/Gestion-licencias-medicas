@@ -125,7 +125,8 @@ export const actualizarLicenciaMutual = async (id, licenciaMutual) => {
             mutual, 
             institucion_mutual, 
             fecha_compin, 
-            id].filter(value => value !== undefined);
+            id
+        ].filter(value => value !== "" && value != undefined);
 
         const [result] = await db.query(query, values);
 

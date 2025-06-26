@@ -117,7 +117,7 @@ export const actualizarTrabajador = async (id, trabajador) => {
             remuneracion_imponible,
             tiene_hijos,
             id
-        ].filter(value => value !== undefined);
+        ].filter(value => value !== "" && value != undefined);
 
         const [result] = await db.query(query, values);
 

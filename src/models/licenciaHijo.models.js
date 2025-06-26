@@ -121,7 +121,8 @@ export const actualizarLicenciaHijo = async (id, licenciaHijo) => {
             licencia_id, 
             hijo_id, 
             fecha_concepcion, 
-            id].filter(value => value !== undefined);
+            id
+        ].filter(value => value !== "" && value != undefined);
 
         const [result] = await db.query(query, values);
 

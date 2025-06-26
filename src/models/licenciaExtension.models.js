@@ -96,7 +96,8 @@ export const actualizarLicenciaExtension = async (id, licenciaExtension) => {
             licencia_id, 
             es_extension, 
             licencia_relacionada, 
-            id].filter(value => value !== undefined);
+            id
+        ].filter(value => value !== "" && value != undefined);
 
         const [result] = await db.query(query, values);
 

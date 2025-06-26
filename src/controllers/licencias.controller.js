@@ -2,9 +2,9 @@ import { crearLicencia, obtenerLicencia, obtenerLicecniaPorId, actualizarLicenci
 
 export const crearLicenciaController = async (req, res) => {
     try {
-        const { trabajador_id, profesional_id, tipo_licencia_id, afp_id, estado_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones} = req.body;
+        const { trabajador_id, profesional_id, tipo_licencia_id, afp_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones} = req.body;
         
-        if (!trabajador_id || !profesional_id || !tipo_licencia_id || !afp_id || !estado_id || !fecha_emision || !dias || !inicio_reposo || !termino_reposo || !tipo_reposo_id || !jornada_id || !lugar_reposo_id) {
+        if (!trabajador_id || !profesional_id || !tipo_licencia_id || !afp_id || !fecha_emision || !dias || !inicio_reposo || !termino_reposo || !tipo_reposo_id || !lugar_reposo_id) {
             return res.status(400).json({
                 status: 400,
                 message: "Todos los datos son obligatorios"
@@ -16,7 +16,6 @@ export const crearLicenciaController = async (req, res) => {
             profesional_id,
             tipo_licencia_id,
             afp_id,
-            estado_id,
             fecha_emision,
             dias: parseInt(dias),
             inicio_reposo,
@@ -117,7 +116,7 @@ export const actualizarLicenciaController = async (req, res) => {
             afp_id,
             estado_id,
             fecha_emision,
-            dias: parseInt(dias),
+            dias,
             inicio_reposo,
             termino_reposo,
             tipo_reposo_id,

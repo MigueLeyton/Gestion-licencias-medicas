@@ -2,9 +2,9 @@ import { pool as db } from '../database/database.js';
 
 export const crearLicencia = async (licencia) => {
     try {
-        const { trabajador_id, profesional_id, tipo_licencia_id, afp_id, estado_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones } = licencia;
-        const query = "INSERT INTO licencias (trabajador_id, profesional_id, tipo_licencia_id, afp_id, estado_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        const values = [trabajador_id, profesional_id, tipo_licencia_id, afp_id, estado_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones];
+        const { trabajador_id, profesional_id, tipo_licencia_id, afp_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones } = licencia;
+        const query = "INSERT INTO licencias (trabajador_id, profesional_id, tipo_licencia_id, afp_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        const values = [trabajador_id, profesional_id, tipo_licencia_id, afp_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones];
         const [result] = await db.query(query, values);
 
         if (result.affectedRows > 0) {
@@ -137,7 +137,7 @@ export const actualizarLicencia = async (id, licencia) => {
             lugar_reposo_id, 
             direccion_reposo, 
             observaciones, 
-            id].filter(value => value !== undefined);
+            id].filter(value => value !== "" && value != undefined);
 
         const [result] = await db.query(query, values);
 

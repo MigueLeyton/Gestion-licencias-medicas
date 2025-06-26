@@ -3,7 +3,6 @@ import { pool as db } from "../database/database.js";
 export const crearProfesional = async (profesionales) => {
     try {
         const {rut, nombres, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono} = profesionales;
-
         const query = "INSERT INTO profesionales (rut, nombres, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         const values = [rut, nombres, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono];
 
@@ -123,7 +122,7 @@ export const actualizarProfesional = async (id, profesionales) => {
             direccion, 
             telefono, 
             id
-        ].filter(value => value !== undefined);
+        ].filter(value => value !== "" && value != undefined);
 
         const [result] = await db.query(query, values);
 
