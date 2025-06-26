@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import { verificarToken } from '../utils/jwt.js';
 
+
 config();
  
 export const verificarTokenMiddleware = (req, res, next) => {

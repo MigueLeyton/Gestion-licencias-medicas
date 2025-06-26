@@ -1,5 +1,5 @@
 import { crearUsuario, obtenerUsuarioPorId, obtenerUsuarios, actualizarUsuario, eliminarUsuario } from "../models/usuarios.models.js";
-import { obtenerDatosUsuario } from "../utils/obtenerUsuario.js";
+import { decodificarToken } from "../utils/jwt.js";
 
 export const crearUsuarioController = async (req, res) => {
     try {
@@ -11,6 +11,14 @@ export const crearUsuarioController = async (req, res) => {
                 message: "Los datos no son válidos"
             });
         }
+
+        if (rol !== "Administrador" && rol !== "Usuario") {
+            return res.status(400).json({ 
+                status: 400, 
+                message: "El rol debe ser 'Administrador' o 'Trabajador'" 
+            });
+        }
+        
         const usuario = {
             nombre,
             email,
@@ -100,22 +108,30 @@ export const obtenerUsuarioPorIdController = async (req, res) => {
 export const actualizarUsuarioController = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, email, password_hash, fecha_nacimiento} = req.body;
+        const { nombre, email, password_hash, fecha_nacimiento, rol} = req.body;
         
         const token = req.headers["authorization"]?.split(" ")[1]
-        const datosUsuario = await obtenerDatosUsuario(token)
-
-        let rol = ""
         
-        if(datosUsuario.rol == "Administrador"){
-            rol = req.body.rol
-        }        
+        const { rol: tokenrol } = decodificarToken(token); 
 
-        
+        if (tokenrol !== "Administrador" && rol) {
+            return res.status(403).json({ 
+                status: 403, 
+                message: "No tienes permisos para modificar tu rol de usuario" 
+            });
+        }
+      
         if (!nombre && !email && !password_hash && !fecha_nacimiento && !rol) {
             return res.status(400).json({ 
             status: 400, 
             message: "Los datos no son válidos"
+            });
+        }
+
+        if (rol !== "Administrador" && rol !== "Usuario") {
+            return res.status(400).json({ 
+                status: 400, 
+                message: "El rol debe ser 'Administrador' o 'Trabajador'" 
             });
         }
 
@@ -127,13 +143,6 @@ export const actualizarUsuarioController = async (req, res) => {
             rol
         }
 
-        
-
-
-     
-
-
-     
         const resultado = await actualizarUsuario(id, usuario);
 
         if (!resultado.success) {

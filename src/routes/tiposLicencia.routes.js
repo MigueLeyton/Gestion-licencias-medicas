@@ -1,6 +1,7 @@
 import { crearTiposLicenciaController, obtenerTiposLicenciaController, obtenerTiposLicenciaPorIdController, actualizarTiposLicenciaController, eliminarTiposLicenciaController } from "../controllers/tiposLicencia.controller.js";
 import { Router } from "express";
 import { verificarTokenMiddleware } from "../middlewares/verificarToken.js";
+import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
@@ -8,6 +9,6 @@ router.post("/tipos-licencia", verificarTokenMiddleware, crearTiposLicenciaContr
 router.get("/tipos-licencia", verificarTokenMiddleware, obtenerTiposLicenciaController);
 router.get("/tipos-licencia/:id", verificarTokenMiddleware, obtenerTiposLicenciaPorIdController);
 router.put("/tipos-licencia/:id", verificarTokenMiddleware, actualizarTiposLicenciaController);
-router.delete("/tipos-licencia/:id", verificarTokenMiddleware, eliminarTiposLicenciaController);
+router.delete("/tipos-licencia/:id", verificarTokenMiddleware, verificarAdmin, eliminarTiposLicenciaController);
   
 export default router;

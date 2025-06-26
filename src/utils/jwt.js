@@ -29,3 +29,12 @@ export const verificarToken = (token) => {
         return false;
     }
 }
+
+export const decodificarToken = (token) => {
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        return decoded;
+    } catch (error) {
+        return null;
+    }
+}

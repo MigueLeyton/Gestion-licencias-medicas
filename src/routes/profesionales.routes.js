@@ -1,6 +1,7 @@
 import { crearProfesionalController, obtenerProfesionalesController, obtenerProfesionalesPorIdController, actualizarProfesionalController, eliminarProfesionalContoller } from "../controllers/profesional.controller.js";
 import { Router } from "express";
 import { verificarTokenMiddleware } from "../middlewares/verificarToken.js";
+import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
@@ -8,6 +9,6 @@ router.post("/profesionales", verificarTokenMiddleware, crearProfesionalControll
 router.get("/profesionales", verificarTokenMiddleware, obtenerProfesionalesController);
 router.get("/profesionales/:id", verificarTokenMiddleware, obtenerProfesionalesPorIdController);
 router.put("/profesionales/:id", verificarTokenMiddleware, actualizarProfesionalController);
-router.delete("/profesionales/:id", verificarTokenMiddleware, eliminarProfesionalContoller); 
+router.delete("/profesionales/:id", verificarTokenMiddleware, verificarAdmin, eliminarProfesionalContoller); 
 
 export default router; 
