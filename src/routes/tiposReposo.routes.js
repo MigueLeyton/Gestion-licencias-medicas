@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con los tipos de reposo.
 router.post("/tipos-reposo", verificarTokenMiddleware, crearTiposReposoController);
 router.get("/tipos-reposo", verificarTokenMiddleware, obtenerTiposReposoController);
 router.get("/tipos-reposo/:id", verificarTokenMiddleware, obtenerTiposReposoPorIdController);

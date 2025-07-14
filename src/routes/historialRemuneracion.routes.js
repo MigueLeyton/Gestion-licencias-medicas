@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con el historial de remuneración de los trabajadores.
 router.post("/historial-remuneracion", verificarTokenMiddleware, crearHistorialRemuneracionController);
 router.get("/historial-remuneracion", verificarTokenMiddleware, obtenerHistorialRemuneracionController);
 router.get("/historial-remuneracion/:id", verificarTokenMiddleware, obtenerHistorialRemuneracionPorIdController);

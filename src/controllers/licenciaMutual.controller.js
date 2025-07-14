@@ -1,5 +1,7 @@
 import { crearLicenciaMutual, obtenerLicenciaMutual, obtenerLicenciaMutualPorId, obtenerLicenciaMutualPorFecha, actualizarLicenciaMutual, eliminarLicenciaMutual } from "../models/licenciaMutual.models.js";
 
+// Controladores para la gestión de licencias mutuales
+// Crear una nueva licencia mutual
 export const crearLicenciaMutualController = async (req, res) => {
     try {
         const { licencia_id, mutual, institucion_mutual, fecha_compin } = req.body;
@@ -39,6 +41,7 @@ export const crearLicenciaMutualController = async (req, res) => {
     }
 }
 
+// Obtener todas las licencias mutuales
 export const obtenerLicenciaMutualController = async (req, res) => {
     try {
         const resultado = await obtenerLicenciaMutual();
@@ -63,6 +66,7 @@ export const obtenerLicenciaMutualController = async (req, res) => {
     }
 }
 
+// Obtener una licencia mutual por ID
 export const obtenerLicenciaMutualPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -95,6 +99,7 @@ export const obtenerLicenciaMutualPorIdController = async (req, res) => {
     }
 }
 
+// Obtener licencias mutuales por fecha
 export const obtenerLicenciaMutualPorFechaController = async (req, res) => {
     try {
         const { fecha } = req.body;
@@ -128,6 +133,7 @@ export const obtenerLicenciaMutualPorFechaController = async (req, res) => {
     }
 }
 
+// Actualizar una licencia mutual
 export const actualizadarLicenciaMutualController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -161,6 +167,7 @@ export const actualizadarLicenciaMutualController = async (req, res) => {
     }
 }
 
+// Eliminar una licencia mutual
 export const eliminadarLicenciaMutualController = async (req, res) => {
     try {
         const { id } = req.params;

@@ -1,5 +1,7 @@
 import { crearProfesional, obtenerProfesionales, obtenerProfesionalesPorId, actualizarProfesional, eliminarProfesinal } from "../models/profesionales.models.js"; 
 
+// Controladores para la gestión de profesionales
+// Crear un nuevo profesional
 export const crearProfesionalController = async (req, res) => {
     try {
         const { rut, nombres, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono } = req.body;
@@ -44,6 +46,7 @@ export const crearProfesionalController = async (req, res) => {
     }
 }
 
+// Obtener todos los profesionales
 export const obtenerProfesionalesController = async (req, res) => {
     try {
         const resultado = await obtenerProfesionales(); 
@@ -68,6 +71,7 @@ export const obtenerProfesionalesController = async (req, res) => {
     }
 }
 
+// Obtener un profesional por ID
 export const obtenerProfesionalesPorIdController = async (req, res) => {
     try {
         const {id} = req.params;
@@ -101,6 +105,7 @@ export const obtenerProfesionalesPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar un profesional
 export const actualizarProfesionalController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -137,6 +142,7 @@ export const actualizarProfesionalController = async (req, res) => {
     }
 }
 
+// Eliminar un profesional
 export const eliminarProfesionalContoller = async (req, res) => {
     try {
         const {id} = req.params;

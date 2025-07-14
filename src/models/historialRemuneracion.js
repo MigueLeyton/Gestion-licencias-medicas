@@ -1,5 +1,6 @@
 import { pool as db } from '../database/database.js';
 
+// Función para crear un historial de remuneración.
 export const crearHistorialRemuneracion = async (historialRemuneracion) => {
     try {
         const { trabajador_id, imponible, liquido, fecha_actualizacion } = historialRemuneracion;
@@ -26,6 +27,7 @@ export const crearHistorialRemuneracion = async (historialRemuneracion) => {
     }
 }
 
+// Función para obtener todos los historiales de remuneración.
 export const obtenerHistorialRemuneracion = async () => {
     try {
         const query = "SELECT id, trabajador_id, imponible, liquido, fecha_actualizacion FROM historial_remuneracion WHERE eliminado != 1";
@@ -50,6 +52,7 @@ export const obtenerHistorialRemuneracion = async () => {
     }
 }
 
+// Función para obtener un historial de remuneración por ID.
 export const obtenerHistorialRemuneracionPorId = async (id) => {
     try {
         const query = "SELECT id, trabajador_id, imponible, liquido, fecha_actualizacion FROM historial_remuneracion WHERE id = ? AND eliminado != 1";
@@ -75,6 +78,7 @@ export const obtenerHistorialRemuneracionPorId = async (id) => {
     }
 }
 
+// Función para obtener un historial de remuneración por trabajador y fecha.
 export const obtenerHistorialRemuneracionPorFecha = async (trabajador_id, fecha) => {
     try {
         const query = "SELECT id, trabajador_id, imponible, liquido, fecha_actualizacion FROM historial_remuneracion WHERE trabajador_id = ? AND fecha_actualizacion = ? AND eliminado != 1";
@@ -100,6 +104,7 @@ export const obtenerHistorialRemuneracionPorFecha = async (trabajador_id, fecha)
     }
 }
 
+// Función para actualizar un historial de remuneración.
 export const actualizarHistorialRemuneracion = async (id, historialRemuneracion) => {
     try {
         const { trabajador_id, imponible, liquido, fecha_actualizacion } = historialRemuneracion;
@@ -126,6 +131,7 @@ export const actualizarHistorialRemuneracion = async (id, historialRemuneracion)
     }
 }
 
+// Función para eliminar un historial de remuneración (marcar como eliminado).
 export const eliminarHistorialRemuneracion = async (id) => {
     try {
         const query = "UPDATE historial_remuneracion SET eliminado = 1 WHERE id = ? AND eliminado != 1";

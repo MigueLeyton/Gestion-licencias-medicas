@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con las licencias mutuales.
 router.post("/licencia-mutual", verificarTokenMiddleware, crearLicenciaMutualController);
 router.get("/licencia-mutual", verificarTokenMiddleware, obtenerLicenciaMutualController);
 router.get("/licencia-mutual/:id", verificarTokenMiddleware, obtenerLicenciaMutualPorIdController);

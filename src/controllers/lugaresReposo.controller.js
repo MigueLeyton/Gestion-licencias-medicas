@@ -1,5 +1,7 @@
 import { crearLugaresReposo, obtenerLugaresReposo, obtenerLugaresReposoPorId, actualizarLugaresReposo, eliminarLugaresReposo } from "../models/lugaresReposo.models.js";
 
+// Controladores para la gestión de lugares de reposo
+// Crear un nuevo lugar de reposo
 export const crearLugaresReposoController = async (req, res) => {
     try {
         const { nombre } = req.body;
@@ -36,6 +38,7 @@ export const crearLugaresReposoController = async (req, res) => {
     }
 }
 
+// Obtener todos los lugares de reposo
 export const obtenerLugaresReposoController = async (req, res) => {
     try {
         const resultado = await obtenerLugaresReposo();
@@ -60,6 +63,7 @@ export const obtenerLugaresReposoController = async (req, res) => {
     }
 }
 
+// Obtener un lugar de reposo por ID
 export const obtenerLugaresReposoPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -93,6 +97,7 @@ export const obtenerLugaresReposoPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar un lugar de reposo
 export const actualizarLugaresReposoController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -123,6 +128,7 @@ export const actualizarLugaresReposoController = async (req, res) => {
     }
 }
 
+// Eliminar un lugar de reposo
 export const eliminarLugaresReposoController = async (req, res) => {
     try {
         const { id } = req.params;  

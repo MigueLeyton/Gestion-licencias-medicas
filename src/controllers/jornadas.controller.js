@@ -1,5 +1,7 @@
 import { crearJornada, obtenerJornadas, obtenerJornadasPorId, actualizarJornada, eliminarJornada } from "../models/jornadas.models.js";
 
+// Controladores para la gestión de jornadas laborales
+// Crear una nueva jornada
 export const crearJornadaController = async (req, res) => {
     try {
         const { nombre } = req.body;
@@ -36,6 +38,7 @@ export const crearJornadaController = async (req, res) => {
     }
 }
 
+// Obtener todas las jornadas
 export const obtenerJornadasController = async (req, res) => {
     try {
         const resultado = await obtenerJornadas();
@@ -61,6 +64,7 @@ export const obtenerJornadasController = async (req, res) => {
     }
 }
 
+// Obtener una jornada por ID
 export const obtenerJornadasPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -94,6 +98,7 @@ export const obtenerJornadasPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar una jornada
 export const actualizarJornadasController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -125,6 +130,7 @@ export const actualizarJornadasController = async (req, res) => {
     }
 }
 
+// Eliminar una jornada
 export const eliminarJornadaController = async (req, res) => {
     try {
         const { id } = req.params;

@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear un tipo de licencia.
 export const crearTiposLicencia = async (tiposLicencia) => {
     try {
         const { nombre } = tiposLicencia;
@@ -26,6 +27,7 @@ export const crearTiposLicencia = async (tiposLicencia) => {
     }
 }
 
+// Función para obtener todos los tipos de licencia.
 export const obtenerTiposLicencia = async () => {
     try {
         const query = "SELECT id, nombre FROM tipos_licencia WHERE eliminado != 1";
@@ -50,6 +52,7 @@ export const obtenerTiposLicencia = async () => {
     }
 }
 
+// Función para obtener un tipo de licencia por ID.
 export const obtenerTiposLicenciaPorId = async (id) => {
     try {
         const query = "SELECT id, nombre FROM tipos_licencia WHERE id = ? AND eliminado != 1";
@@ -75,6 +78,7 @@ export const obtenerTiposLicenciaPorId = async (id) => {
     }
 }
 
+// Función para actualizar un tipo de licencia.
 export const actualizarTiposLicencia = async (id, tiposLicencia) => {
     try {
         const { nombre } = tiposLicencia;
@@ -101,6 +105,7 @@ export const actualizarTiposLicencia = async (id, tiposLicencia) => {
     }
 }
 
+// Función para eliminar un tipo de licencia (marcar como eliminado).
 export const eliminarTiposLicencia = async (id) => {
     try {
         const query = "UPDATE tipos_licencia SET eliminado = 1 WHERE id = ? and eliminado != 1";

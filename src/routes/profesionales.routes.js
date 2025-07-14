@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con los profesionales.
 router.post("/profesionales", verificarTokenMiddleware, crearProfesionalController);
 router.get("/profesionales", verificarTokenMiddleware, obtenerProfesionalesController);
 router.get("/profesionales/:id", verificarTokenMiddleware, obtenerProfesionalesPorIdController);

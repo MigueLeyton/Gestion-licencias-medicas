@@ -1,5 +1,7 @@
 import { crearLicencia, obtenerLicencia, obtenerLicecniaPorId, actualizarLicencia, eliminarLicecnia } from "../models/licencias.models.js";
 
+// Controladores para la gestión de licencias médicas
+// Crear una nueva licencia médica
 export const crearLicenciaController = async (req, res) => {
     try {
         const { trabajador_id, profesional_id, tipo_licencia_id, afp_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones} = req.body;
@@ -21,7 +23,7 @@ export const crearLicenciaController = async (req, res) => {
             inicio_reposo,
             termino_reposo,
             tipo_reposo_id,
-            jornada_id,
+            jornada_id: jornada_id || null,
             lugar_reposo_id,
             direccion_reposo: direccion_reposo || null,
             observaciones: observaciones || null
@@ -48,6 +50,7 @@ export const crearLicenciaController = async (req, res) => {
     }
 }
 
+// Obtener todas las licencias médicas
 export const obtenerLicenciaController = async (req, res) => {
     try {
         const resultado = await obtenerLicencia();
@@ -71,6 +74,7 @@ export const obtenerLicenciaController = async (req, res) => {
     }
 }
 
+// Obtener una licencia médica por ID
 export const obtenerLicenciaPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -104,6 +108,7 @@ export const obtenerLicenciaPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar una licencia médica
 export const actualizarLicenciaController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -147,6 +152,7 @@ export const actualizarLicenciaController = async (req, res) => {
     }
 }
 
+// Eliminar una licencia médica
 export const eliminarLicenciaController = async (req, res) => {
     try {
         const { id } = req.params;

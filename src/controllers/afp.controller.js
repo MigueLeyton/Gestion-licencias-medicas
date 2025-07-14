@@ -1,5 +1,7 @@
 import { crearAfp, obtenerAfp, obtenerAfpPorId, actualizarAfp, eliminarAfp } from "../models/afp.models.js";
 
+// Controladores para la gestión de AFP (Administradoras de Fondos de Pensiones)
+// Crear una nueva AFP
 export const crearAfpController = async (req, res) => {
     try {
         const { nombre, tasa, fecha_vigencia } = req.body;
@@ -36,6 +38,7 @@ export const crearAfpController = async (req, res) => {
     } 
 }
 
+// Obtener todas las AFP
 export const obtenerAfpController = async (req, res) => {
     try {
         const { fecha } = req.query;
@@ -62,6 +65,7 @@ export const obtenerAfpController = async (req, res) => {
     }
 }
 
+// Obtener una AFP por ID
 export const obtenerAfpPorIdController = async (req, res) => {
     try {
         const { id } = req.params;     
@@ -94,6 +98,7 @@ export const obtenerAfpPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar una AFP
 export const actualizarAfpController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -126,6 +131,7 @@ export const actualizarAfpController = async (req, res) => {
     }
 }
 
+// Eliminar una AFP
 export const eliminarAfpController = async (req, res) => {
     try {
         const { id } = req.params;

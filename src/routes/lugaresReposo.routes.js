@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con los lugares de reposo.
 router.post("/lugares-reposo", verificarTokenMiddleware, crearLugaresReposoController);
 router.get("/lugares-reposo", verificarTokenMiddleware, obtenerLugaresReposoController);
 router.get("/lugares-reposo/:id", verificarTokenMiddleware, obtenerLugaresReposoPorIdController);

@@ -1,6 +1,7 @@
 import e from 'cors';
 import { pool as db } from '../database/database.js';
 
+// Función para crear un nuevo estado de licencia.
 export const crearEstadosLicencia = async (estadoLicencia) => {
     try {
         const { nombre } = estadoLicencia;
@@ -27,6 +28,7 @@ export const crearEstadosLicencia = async (estadoLicencia) => {
     }
 }
 
+// Función para obtener todos los estados de licencia.
 export const obtenerEstadosLicencia = async () => {
     try {
         const query = "SELECT id, nombre FROM estados_licencia WHERE eliminado != 1";
@@ -51,6 +53,7 @@ export const obtenerEstadosLicencia = async () => {
     }
 }
 
+// Función para obtener un estado de licencia por ID.
 export const obtenerEstadosLicenciaPorId = async (id) => {
     try {
         const query = "SELECT id, nombre FROM estados_licencia WHERE id = ? AND eliminado != 1";
@@ -76,6 +79,7 @@ export const obtenerEstadosLicenciaPorId = async (id) => {
     }
 }
 
+// Función para actualizar un estado de licencia.
 export const actualizarEstadosLicencia = async (id, estadoLicencia) => {
     try {
         const { nombre } = estadoLicencia;
@@ -102,6 +106,7 @@ export const actualizarEstadosLicencia = async (id, estadoLicencia) => {
     }
 }
 
+// Función para eliminar un estado de licencia (marcar como eliminado).
 export const eliminarEstadosLicencia = async (id) => {
     try {
         const query = "UPDATE estados_licencia SET eliminado = 1 WHERE id = ?";

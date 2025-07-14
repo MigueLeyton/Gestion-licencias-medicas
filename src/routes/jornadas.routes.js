@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con las jornadas laborales.
 router.post("/jornadas", verificarTokenMiddleware, crearJornadaController);
 router.get("/jornadas", verificarTokenMiddleware, obtenerJornadasController);
 router.get("/jornadas/:id", verificarTokenMiddleware, obtenerJornadasPorIdController);

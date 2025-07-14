@@ -1,5 +1,7 @@
 import { crearTiposReposo, obtenerTiposReposo, obtenerTiposReposoPorId, actualizarTiposReposo, eliminarTiposReposo } from "../models/tiposReposo.models.js";
 
+// Controladores para la gestión de tipos de reposo
+// Crear un nuevo tipo de reposo
 export const crearTiposReposoController = async (req, res) => {
     try {
         const { nombre } = req.body;
@@ -35,6 +37,7 @@ export const crearTiposReposoController = async (req, res) => {
     }
 }
 
+// Obtener todos los tipos de reposo
 export const obtenerTiposReposoController = async (req, res) => {
     try {
         const resultado = await obtenerTiposReposo();
@@ -59,6 +62,7 @@ export const obtenerTiposReposoController = async (req, res) => {
     }
 }
 
+// Obtener un tipo de reposo por ID
 export const obtenerTiposReposoPorIdController = async (req, res) => {
     try {
         const {id} = req.params;
@@ -92,6 +96,7 @@ export const obtenerTiposReposoPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar un tipo de reposo
 export const actualizarTiposReposoController = async (req, res) => {
     try {
         const {id} = req.params;
@@ -122,6 +127,7 @@ export const actualizarTiposReposoController = async (req, res) => {
     }
 }
 
+// Eliminar un tipo de reposo
 export const eliminarTiposReposoController = async (req, res) => {
     try {
         const {id} = req.params;

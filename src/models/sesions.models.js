@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { pool } from "../database/database.js"; 
 import { generarToken } from "../utils/jwt.js";
 
+// Función para logear un usuario.
 export const loginUsuario = async (email, password_hash) => {
     try {
      

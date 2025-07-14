@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear un nuevo trabajador.
 export const crearTrabajador = async (trabajador) => {
     try {
         const {rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible, tiene_hijos} = trabajador;
@@ -29,6 +30,7 @@ export const crearTrabajador = async (trabajador) => {
     }
 }
 
+// Función para obtener todos los trabajadores.
 export const obtenerTrabajadores = async () => {
     try {
         const query = "SELECT id, rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible, tiene_hijos FROM trabajadores WHERE eliminado != 1";
@@ -53,6 +55,7 @@ export const obtenerTrabajadores = async () => {
     }
 }
 
+// Función para obtener un trabajador por ID.
 export const obtenerTrabajadorPorId = async (id) => {
     try {
         const query = "SELECT id, rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible, tiene_hijos FROM trabajadores WHERE id = ? AND eliminado != 1";
@@ -79,9 +82,15 @@ export const obtenerTrabajadorPorId = async (id) => {
     }
 }
 
+// Función para actualizar un trabajador.
 export const actualizarTrabajador = async (id, trabajador) => {
     try {
-        const {rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible, tiene_hijos} = trabajador;
+        const {rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible } = trabajador;
+        let {tiene_hijos} = trabajador;
+        console.log("Datos a actualizar:", trabajador);
+        
+
+      
 
         let query = "UPDATE trabajadores";
 
@@ -89,11 +98,11 @@ export const actualizarTrabajador = async (id, trabajador) => {
             query += " SET rut = ?";
         }
         if(nombres) {
-            query += (query.includes("SET") ? ", " : " SET ") + "nombre = ?";
+            query += (query.includes("SET") ? ", " : " SET ") + "nombres = ?";
         }
         if(apellido_paterno) {
             query += (query.includes("SET") ? ", " : " SET ") + "apellido_paterno = ?";
-        }
+        } 
         if(apellido_materno) {
             query += (query.includes("SET") ? ", " : " SET ") + "apellido_materno = ?";
         }
@@ -103,7 +112,7 @@ export const actualizarTrabajador = async (id, trabajador) => {
         if(remuneracion_imponible) {
             query += (query.includes("SET") ? ", " : " SET ") + "remuneracion_imponible = ?";
         }
-        if(tiene_hijos !== undefined) {
+        if(tiene_hijos !== undefined  && tiene_hijos !== null && tiene_hijos !== "") {
             query += (query.includes("SET") ? ", " : " SET ") + "tiene_hijos = ?";
         }
         query += " WHERE id = ?";
@@ -117,8 +126,10 @@ export const actualizarTrabajador = async (id, trabajador) => {
             remuneracion_imponible,
             tiene_hijos,
             id
-        ].filter(value => value !== "" && value != undefined);
+        ].filter(value => value !== "" && value != undefined && value != null );
 
+        console.log("Query:", query);
+        console.log("Values:", values);
         const [result] = await db.query(query, values);
 
         if(result.affectedRows > 0) {
@@ -141,6 +152,7 @@ export const actualizarTrabajador = async (id, trabajador) => {
     }
 }
 
+// Función para eliminar un trabajador (marcar como eliminado).
 export const eliminarTrabajador = async (id) => {
     try {
         const query = "UPDATE trabajadores SET eliminado = 1 WHERE id = ?";

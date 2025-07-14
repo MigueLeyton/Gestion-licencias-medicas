@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con las extensiones de licencias médicas.
 router.post("/licencia-extension", verificarTokenMiddleware, crearLicenciaExtensionController);
 router.get("/licencia-extension", verificarTokenMiddleware, obtenerLicenciaExtensionController);
 router.get("/licencia-extension/:id", verificarTokenMiddleware, obtenerLicenciaExtensionPorIdController);

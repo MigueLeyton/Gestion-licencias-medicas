@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con los tipos de licencia.
 router.post("/tipos-licencia", verificarTokenMiddleware, crearTiposLicenciaController);
 router.get("/tipos-licencia", verificarTokenMiddleware, obtenerTiposLicenciaController);
 router.get("/tipos-licencia/:id", verificarTokenMiddleware, obtenerTiposLicenciaPorIdController);

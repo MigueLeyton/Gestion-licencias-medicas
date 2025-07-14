@@ -1,5 +1,7 @@
 import { crearLicenciaHijo, obtenerLicenciaHijos, obtenerLicenciaHijoPorId, obtenerLicenciaHijoPorFecha, actualizarLicenciaHijo, eliminarLicenciaHijo } from "../models/licenciaHijo.models.js";
 
+// Controladores para la gestión de licencias de hijos
+// Crear una nueva licencia de hijo
 export const crearLicenciaHijoController = async (req, res) => {
     try {
         const { licencia_id, hijo_id, fecha_concepcion } = req.body;
@@ -37,6 +39,7 @@ export const crearLicenciaHijoController = async (req, res) => {
     }
 }
 
+// Obtener todas las licencias de hijos
 export const obtenerLicenciaHijosController = async (req, res) => {
     try {
         const resultado = await obtenerLicenciaHijos();
@@ -61,6 +64,7 @@ export const obtenerLicenciaHijosController = async (req, res) => {
     }
 }
 
+// Obtener una licencia de hijo por ID
 export const obtenerLicenciaHijoPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -93,6 +97,7 @@ export const obtenerLicenciaHijoPorIdController = async (req, res) => {
     }
 }
 
+// Obtener licencias de hijos por fecha
 export const obtenerLicenciaHijoPorFechaController = async (req, res) => {
     try {
         const { fecha } = req.query;
@@ -126,6 +131,7 @@ export const obtenerLicenciaHijoPorFechaController = async (req, res) => {
     }
 }
 
+// Actualizar una licencia de hijo
 export const actualizarLicenciaHijoController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -158,6 +164,7 @@ export const actualizarLicenciaHijoController = async (req, res) => {
     }
 }
 
+// Eliminar una licencia de hijo
 export const eliminarLicenciaHijoController = async (req, res) => {
     try {
         const { id } = req.params;

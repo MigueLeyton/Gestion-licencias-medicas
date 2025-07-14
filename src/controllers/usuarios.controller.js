@@ -1,6 +1,8 @@
 import { crearUsuario, obtenerUsuarioPorId, obtenerUsuarios, actualizarUsuario, eliminarUsuario } from "../models/usuarios.models.js";
 import { decodificarToken } from "../utils/jwt.js";
 
+// Controladores para la gestión de usuarios
+// Crear un nuevo usuario
 export const crearUsuarioController = async (req, res) => {
     try {
         const { nombre, email, password_hash, fecha_nacimiento, rol } = req.body;
@@ -48,6 +50,7 @@ export const crearUsuarioController = async (req, res) => {
     }
 }
 
+// Obtener todos los usuarios
 export const obtenerUsuariosController = async (req, res) => {
     try {
         const resultado = await obtenerUsuarios();
@@ -72,6 +75,7 @@ export const obtenerUsuariosController = async (req, res) => {
     }
 }
 
+// Obtener un usuario por ID 
 export const obtenerUsuarioPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -105,6 +109,8 @@ export const obtenerUsuarioPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar un usuario
+// Permite actualizar los datos de un usuario, incluyendo su rol si el token es de un administrador
 export const actualizarUsuarioController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -164,6 +170,9 @@ export const actualizarUsuarioController = async (req, res) => {
     }
 }
 
+// Eliminar un usuario
+// Permite eliminar un usuario por su ID
+// Solo un administrador puede eliminar usuarios
 export const eliminarUsuarioController = async (req, res) => {
     try {
         const { id } = req.params;

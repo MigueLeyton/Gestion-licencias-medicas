@@ -82,6 +82,7 @@ export const obtenerUsuarioPorId = async (id) => {
     }
 }
 
+// Función para actualizar un usuario.
 export const actualizarUsuario = async (id, users, idPersonaLogueada) => {
     try {
         const { nombre, email, password_hash, fecha_nacimiento, rol } = users; 
@@ -140,6 +141,7 @@ export const actualizarUsuario = async (id, users, idPersonaLogueada) => {
     }
 }
 
+// Función para eliminar un usuario (marcar como eliminado).
 export const eliminarUsuario = async (id) => {
     try {
         const query = "UPDATE users SET eliminado = 1 WHERE id = ?";

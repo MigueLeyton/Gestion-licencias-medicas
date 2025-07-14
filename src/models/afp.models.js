@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear una nueva AFP.
 export const crearAfp = async (afp) => {
     try {
         const { nombre, tasa, fecha_vigencia } = afp;
@@ -39,6 +40,7 @@ export const crearAfp = async (afp) => {
     }
 }
 
+// Función para obtener todas las AFP.
 export const obtenerAfp = async (fecha = null) => {
     try {
         let query = "SELECT id, nombre, tasa, fecha_vigencia FROM afp WHERE eliminado != 1 AND MONTH(fecha_vigencia) = ? AND YEAR(fecha_vigencia) = ?";
@@ -76,6 +78,7 @@ export const obtenerAfp = async (fecha = null) => {
     }
 }
 
+// Función para obtener una AFP por ID.
 export const obtenerAfpPorId = async (id) => {
     try {
         const query = "SELECT id, nombre, tasa, fecha_vigencia FROM afp WHERE id = ? AND eliminado != 1";
@@ -101,6 +104,7 @@ export const obtenerAfpPorId = async (id) => {
     }
 }
 
+// Función para actualizar una AFP.
 export const actualizarAfp = async (id, afp) => {
     try {
         const { nombre, tasa, fecha_vigencia } = afp;
@@ -129,6 +133,7 @@ export const actualizarAfp = async (id, afp) => {
     }
 }
 
+// Función para eliminar una AFP (marcar como eliminada).
 export const eliminarAfp = async (id) => {
     try {
         const query = "UPDATE afp SET eliminado = 1 WHERE id = ? AND eliminado != 1";

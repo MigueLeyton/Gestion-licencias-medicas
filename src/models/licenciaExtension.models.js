@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";   
 
+// Función para crear una licencia de extensión.
 export const crearLicenciaExtension = async (licenciaExtension) => {
     try {
         const { licencia_id, es_exteinsion, licencia_relacionada } = licenciaExtension;
@@ -26,6 +27,7 @@ export const crearLicenciaExtension = async (licenciaExtension) => {
     }
 }
 
+// Función para obtener todas las licencias de extensión.
 export const obtenerLicenciaExtension = async () => {
     try {
         const query = "SELECT id, licencia_id, es_extension, licencia_relacionada FROM licencia_extension WHERE eliminado != 1";
@@ -50,6 +52,7 @@ export const obtenerLicenciaExtension = async () => {
     }
 }
 
+// Función para obtener una licencia de extensión por ID.
 export const obtenerLicenciaExtensionPorId = async (id) => {
     try {
         const query = "SELECT id, licencia_id, es_extension, licencia_relacionada FROM licencia_extension WHERE id = ? AND eliminado != 1";
@@ -74,7 +77,7 @@ export const obtenerLicenciaExtensionPorId = async (id) => {
         };
     }
 }
-
+// Función para actualizar una licencia de extensión.
 export const actualizarLicenciaExtension = async (id, licenciaExtension) => {
     try {
         const { licencia_id, es_extension, licencia_relacionada } = licenciaExtension;
@@ -120,6 +123,7 @@ export const actualizarLicenciaExtension = async (id, licenciaExtension) => {
     }
 }
 
+// Función para eliminar una licencia de extensión (marcar como eliminada).
 export const eliminarLicenciaExtension = async (id) => {
     try {
         const query = "UPDATE licencia_extension SET eliminado = 1 WHERE id = ? AND eliminado != 1";

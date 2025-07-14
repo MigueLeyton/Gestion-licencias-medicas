@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear un tipo de reposo.
 export const crearTiposReposo = async (tipoReposo) => {
     try {
         const { nombre } = tipoReposo;
@@ -27,6 +28,7 @@ export const crearTiposReposo = async (tipoReposo) => {
     }
 }
 
+// Función para obtener todos los tipos de reposo.
 export const obtenerTiposReposo = async () => {
     try {
         const query = "SELECT id, nombre FROM tipos_reposo WHERE eliminado != 1";
@@ -52,6 +54,7 @@ export const obtenerTiposReposo = async () => {
     }
 }
 
+// Función para obtener un tipo de reposo por ID.
 export const obtenerTiposReposoPorId = async (id) => {
     try {
         const query = "SELECT id, nombre FROM tipos_reposo WHERE id = ? AND eliminado != 1";
@@ -79,6 +82,7 @@ export const obtenerTiposReposoPorId = async (id) => {
     }
 }
 
+// Función para actualizar un tipo de reposo.
 export const actualizarTiposReposo = async (id, tipoReposo) => {
     try {
         const { nombre} = tipoReposo;
@@ -107,6 +111,7 @@ export const actualizarTiposReposo = async (id, tipoReposo) => {
     }
 }
 
+// Función para eliminar un tipo de reposo (marcar como eliminado).
 export const eliminarTiposReposo = async (id) => {
     try {
         const query = "UPDATE tipos_reposo SET eliminado = 1 WHERE id = ? AND eliminado != 1";

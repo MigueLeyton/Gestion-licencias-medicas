@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear un profesional.
 export const crearProfesional = async (profesionales) => {
     try {
         const {rut, nombres, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono} = profesionales;
@@ -28,6 +29,7 @@ export const crearProfesional = async (profesionales) => {
     }
 }
 
+// Función para obtener todos los profesionales.
 export const obtenerProfesionales = async () => {
     try {
         const query = "SELECT id, rut, nombres, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono FROM profesionales WHERE eliminado != 1";
@@ -53,6 +55,7 @@ export const obtenerProfesionales = async () => {
     }
 }
 
+// Función para obtener un profesional por ID.
 export const obtenerProfesionalesPorId = async (id) => {
     try {
         const query = "SELECT id, rut, nombres, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono FROM profesionales WHERE id = ? AND eliminado != 1";
@@ -80,6 +83,7 @@ export const obtenerProfesionalesPorId = async (id) => {
     }
 }
 
+// Función para actualizar un profesional.
 export const actualizarProfesional = async (id, profesionales) => {
     try {
         const {rut, nombres, apellido_paterno, apellido_materno, especialidad, otra_especialidad, direccion, telefono} = profesionales;
@@ -146,6 +150,7 @@ export const actualizarProfesional = async (id, profesionales) => {
     }
 }
 
+// Función para eliminar un profesional (marcar como eliminado).
 export const eliminarProfesinal = async (id) => {
     try {
         const query = "UPDATE profesionales SET eliminado = 1 WHERE id = ?";

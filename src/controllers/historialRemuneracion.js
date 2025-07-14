@@ -1,5 +1,7 @@
 import { crearHistorialRemuneracion, obtenerHistorialRemuneracion, obtenerHistorialRemuneracionPorId, obtenerHistorialRemuneracionPorFecha, actualizarHistorialRemuneracion, eliminarHistorialRemuneracion } from "../models/historialRemuneracion.js";
 
+// Controladores para la gestión del historial de remuneración
+// Crear un nuevo historial de remuneración
 export const crearHistorialRemuneracionController = async (req, res) => {
     try {
         const { trabajador_id, imponible, liquido, fecha_actualizacion } = req.body;
@@ -39,6 +41,7 @@ export const crearHistorialRemuneracionController = async (req, res) => {
     }
 }
 
+// Obtener todos los historiales de remuneración
 export const obtenerHistorialRemuneracionController = async (req, res) => {
     try {
         const resultado = await obtenerHistorialRemuneracion();
@@ -63,6 +66,7 @@ export const obtenerHistorialRemuneracionController = async (req, res) => {
     }
 }
 
+// Obtener un historial de remuneración por ID
 export const obtenerHistorialRemuneracionPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -96,6 +100,7 @@ export const obtenerHistorialRemuneracionPorIdController = async (req, res) => {
     }
 }
 
+// Obtener historial de remuneración por trabajador y fecha
 export const obtenerHistorialRemuneracionPorFechaController = async (req, res) => {
     try {
         const { trabajador_id, fecha } = req.query;
@@ -129,6 +134,7 @@ export const obtenerHistorialRemuneracionPorFechaController = async (req, res) =
     }
 }
 
+// Actualizar un historial de remuneración
 export const actualizarHistorialRemuneracionController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -162,6 +168,7 @@ export const actualizarHistorialRemuneracionController = async (req, res) => {
     }
 }
 
+// Eliminar un historial de remuneración
 export const eliminarHistorialRemuneracionController = async (req, res) => {
     try {
         const { id } = req.params;

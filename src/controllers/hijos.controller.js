@@ -1,5 +1,7 @@
 import { crearHijos, obtenerHijosPorTrabajador, actualizarHijo, eliminarHijo } from "../models/hijos.models.js";
 
+// Controladores para la gestión de hijos
+// Crear un nuevo hijo
 export const crearHijosController = async (req, res) => {
     try {
         const { trabajador_id, rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento } = req.body;
@@ -41,6 +43,7 @@ export const crearHijosController = async (req, res) => {
     }
 }
 
+// Obtener hijos por ID de trabajador
 export const obtenerHijosPorTrabajadorController = async (req, res) => {
     try {
         const { trabajador_id } = req.params;
@@ -75,6 +78,7 @@ export const obtenerHijosPorTrabajadorController = async (req, res) => {
     }
 }
 
+// Actualizar un hijo
 export const actualizarHijoController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -111,6 +115,7 @@ export const actualizarHijoController = async (req, res) => {
     }
 }
 
+// Eliminar un hijo
 export const eliminarHijoController = async (req, res) => {
     try {
         const { id } = req.params;

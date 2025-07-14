@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear un nuevo hijo.
 export const crearHijos = async (hijos) => {
     try {
         const { trabajador_id, rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento } = hijos;
@@ -52,6 +53,7 @@ export const crearHijos = async (hijos) => {
     }
 }
 
+// Función para obtener hijos por ID de trabajador.
 export const obtenerHijosPorTrabajador = async (trabajador_id) => {
     try {
         const validacionTrabajador = await validarTrabajador(trabajador_id);
@@ -88,6 +90,7 @@ export const obtenerHijosPorTrabajador = async (trabajador_id) => {
     }
 }
 
+// Función para obtener un hijo por ID.
 export const actualizarHijo = async (id, hijo) => {
     try {
         const { trabajador_id, rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento } = hijo;
@@ -157,6 +160,7 @@ export const actualizarHijo = async (id, hijo) => {
     }
 }
 
+// Función para eliminar un hijo (marcar como eliminado).
 export const eliminarHijo = async (hijo_id) => {
     try {
         const validacionHijo = await validarHijo(hijo_id);
@@ -195,6 +199,7 @@ export const eliminarHijo = async (hijo_id) => {
     }
 }
 
+// Función para validar si un trabajador existe.
 const validarTrabajador = async (trabajador_id) => {
     try {
         const query = `SELECT id FROM trabajadores WHERE id = ?`;
@@ -222,6 +227,7 @@ const validarTrabajador = async (trabajador_id) => {
     }
 }
 
+// Función para cambiar el estado de tiene_hijos en el trabajador.
 const cambiarEstadoHijoTrabajador = async (trabajador_id) => {
     const query = `UPDATE trabajadores SET tiene_hijos = 1 WHERE id = ?`;
     const values = [trabajador_id];
@@ -240,6 +246,7 @@ const cambiarEstadoHijoTrabajador = async (trabajador_id) => {
     };
 }
 
+// Función para validar si se puede eliminar un hijo.
 const validarEliminarHijo = async (trabajador_id) => {
     try {
         const query = "SELECT COUNT(id) as cantidad_hijos FROM hijos WHERE trabajador_id = ?";
@@ -261,6 +268,7 @@ const validarEliminarHijo = async (trabajador_id) => {
     }
 }
 
+// Función para validar si un hijo existe.
 const validarHijo = async (id_hijo) => {
     const query = `SELECT trabajador_id FROM hijos WHERE id = ?`;
     const values = [id_hijo];

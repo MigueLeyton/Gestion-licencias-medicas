@@ -1,5 +1,6 @@
 import { pool as db } from '../database/database.js';
 
+// Función para crear una licencia de hijo.
 export const crearLicenciaHijo = async (licenciaHijo) => {
     try {
         const { licencia_id, hijo_id, fecha_concepcion } = licenciaHijo;
@@ -26,6 +27,7 @@ export const crearLicenciaHijo = async (licenciaHijo) => {
     }
 }
 
+// Función para obtener todas las licencias de hijos.
 export const obtenerLicenciaHijos = async () => {
     try {
         const query = "SELECT id, licencia_id, hijo_id, fecha_concepcion FROM licencia_hijo WHERE eliminado != 1";
@@ -50,6 +52,7 @@ export const obtenerLicenciaHijos = async () => {
     }
 }
 
+// Función para obtener una licencia de hijo por ID.
 export const obtenerLicenciaHijoPorId = async (id) => {
     try {
         const query = "SELECT id, licencia_id, hijo_id, fecha_concepcion FROM licencia_hijo WHERE id = ? AND eliminado != 1";
@@ -75,6 +78,7 @@ export const obtenerLicenciaHijoPorId = async (id) => {
     }
 }
 
+// Función para obtener una licencia de hijo por fecha de concepción.
 export const obtenerLicenciaHijoPorFecha = async (fecha) => {
     try {
         const query = "SELECT id, licencia_id, hijo_id, fecha_concepcion FROM licencia_hijo WHERE fecha_concepcion = ? AND eliminado != 1";
@@ -100,6 +104,7 @@ export const obtenerLicenciaHijoPorFecha = async (fecha) => {
     }
 }
 
+// Función para actualizar una licencia de hijo.
 export const actualizarLicenciaHijo = async (id, licenciaHijo) => {
     try {
         const { licencia_id, hijo_id, fecha_concepcion } = licenciaHijo;
@@ -145,6 +150,7 @@ export const actualizarLicenciaHijo = async (id, licenciaHijo) => {
     }
 }
 
+// Función para eliminar una licencia de hijo (marcar como eliminada).
 export const eliminarLicenciaHijo = async (id) => {
     try {
         const query = "UPDATE licencia_hijo SET eliminado = 1 WHERE id = ? AND eliminado != 1";

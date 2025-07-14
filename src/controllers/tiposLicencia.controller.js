@@ -1,5 +1,7 @@
 import { crearTiposLicencia, obtenerTiposLicencia, obtenerTiposLicenciaPorId, actualizarTiposLicencia, eliminarTiposLicencia } from "../models/tiposLicencia.models.js";
 
+// Controladores para la gestión de tipos de licencia
+// Crear un nuevo tipo de licencia
 export const crearTiposLicenciaController = async (req, res) => {
     try {
         const { nombre } = req.body;
@@ -36,6 +38,7 @@ export const crearTiposLicenciaController = async (req, res) => {
     }
 }
 
+// Obtener todos los tipos de licencia
 export const obtenerTiposLicenciaController = async (req, res) => {
     try {
         const resultado = await obtenerTiposLicencia();
@@ -60,6 +63,7 @@ export const obtenerTiposLicenciaController = async (req, res) => {
     }
 }
 
+// Obtener un tipo de licencia por ID
 export const obtenerTiposLicenciaPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -93,6 +97,7 @@ export const obtenerTiposLicenciaPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar un tipo de licencia
 export const actualizarTiposLicenciaController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -124,6 +129,7 @@ export const actualizarTiposLicenciaController = async (req, res) => {
     }
 }
 
+// Eliminar un tipo de licencia
 export const eliminarTiposLicenciaController = async (req, res) => {
     try {
         const { id } = req.params;

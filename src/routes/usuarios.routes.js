@@ -6,6 +6,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router(); 
 
+// Rutas para manejar las operaciones relacionadas con los usuarios.
 router.post("/usuarios", verificarTokenMiddleware, verificarAdmin, crearUsuarioController);  
 router.get("/usuarios", verificarTokenMiddleware, verificarAdmin, obtenerUsuariosController); 
 router.get("/usuarios/:id", verificarTokenMiddleware, verificarAdmin, obtenerUsuarioPorIdController); 

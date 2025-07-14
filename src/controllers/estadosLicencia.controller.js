@@ -1,5 +1,7 @@
 import { crearEstadosLicencia, obtenerEstadosLicencia, obtenerEstadosLicenciaPorId, actualizarEstadosLicencia, eliminarEstadosLicencia } from "../models/estadosLicencia.models.js";
 
+// Controladores para la gestión de estados de licencia
+// Crear un nuevo estado de licencia
 export const crearEstadoLicenciaController = async (req, res) => {
     try {
         const { nombre } = req.body;
@@ -37,6 +39,7 @@ export const crearEstadoLicenciaController = async (req, res) => {
     }
 }
 
+// Obtener todos los estados de licencia
 export const obtenerEstadosLicenciaController = async (req, res) => {
     try {
         const resultado = await obtenerEstadosLicencia();
@@ -61,6 +64,7 @@ export const obtenerEstadosLicenciaController = async (req, res) => {
     }
 }
 
+// Obtener un estado de licencia por ID
 export const obtenerEstadoLicenciaPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -94,6 +98,7 @@ export const obtenerEstadoLicenciaPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar un estado de licencia
 export const actualizarEstadoLicenciaController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -122,6 +127,7 @@ export const actualizarEstadoLicenciaController = async (req, res) => {
     }
 }
 
+// Eliminar un estado de licencia
 export const eliminarEstadoLicenciaController = async (req, res) => {
     try {
         const { id } = req.params;

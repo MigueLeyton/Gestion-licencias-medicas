@@ -4,6 +4,8 @@ import { verificarToken } from '../utils/jwt.js';
 
 config();
  
+// Middleware para verificar el token de autenticación
+// Este middleware se encarga de verificar si el token enviado en la solicitud es válido y no.
 export const verificarTokenMiddleware = (req, res, next) => {
     try {
 

@@ -1,6 +1,8 @@
 import { pool as db } from "../database/database.js";
 import { decodificarToken } from "../utils/jwt.js";
 
+// Middleware para verificar la modificación de usuarios.
+// Este middleware se encarga de verificar si el usuario tiene el rol adecuado para modificar otros usuarios.
 export const verificarModificacionUsuarios = async (req, res, next) => {
     try {
         const token = req.headers["authorization"]?.split(" ")[1]; // Obtener el token del header Authorization

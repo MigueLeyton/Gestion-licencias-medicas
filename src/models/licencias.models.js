@@ -1,5 +1,6 @@
 import { pool as db } from '../database/database.js';
 
+// Función para crear una licencia.
 export const crearLicencia = async (licencia) => {
     try {
         const { trabajador_id, profesional_id, tipo_licencia_id, afp_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones } = licencia;
@@ -26,6 +27,7 @@ export const crearLicencia = async (licencia) => {
     }
 }
 
+// Función para obtener todas las licencias.
 export const obtenerLicencia = async () => {
     try {
         const query = "SELECT id, trabajador_id, profesional_id, tipo_licencia_id, afp_id, estado_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones FROM licencias WHERE eliminado != 1";
@@ -50,6 +52,7 @@ export const obtenerLicencia = async () => {
     }
 }
 
+// Función para obtener una licencia por ID.
 export const obtenerLicecniaPorId = async (id) => {
     try {
         const query = "SELECT id, trabajador_id, profesional_id, tipo_licencia_id, afp_id, estado_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones FROM licencias WHERE id = ? AND eliminado != 1";
@@ -75,6 +78,7 @@ export const obtenerLicecniaPorId = async (id) => {
     }
 }
 
+// Función para actualizar una licencia.
 export const actualizarLicencia = async (id, licencia) => {
     try {
         const { trabajador_id, profesional_id, tipo_licencia_id, afp_id, estado_id, fecha_emision, dias, inicio_reposo, termino_reposo, tipo_reposo_id, jornada_id, lugar_reposo_id, direccion_reposo, observaciones } = licencia;
@@ -160,6 +164,7 @@ export const actualizarLicencia = async (id, licencia) => {
     }
 }
 
+// Función para eliminar una licencia (marcar como eliminada).
 export const eliminarLicecnia = async (id) => {
     try {
         const query = "UPDATE licencias SET eliminado = 1 WHERE id = ?";

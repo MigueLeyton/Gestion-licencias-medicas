@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear un lugar de reposo.
 export const crearLugaresReposo = async (lugarReposo) => {
     try {
         const { nombre } = lugarReposo;
@@ -28,6 +29,7 @@ export const crearLugaresReposo = async (lugarReposo) => {
     }
 }
 
+// Función para obtener todos los lugares de reposo.
 export const obtenerLugaresReposo = async () => {
     try {
         const query = "SELECT id, nombre FROM lugares_reposo WHERE eliminado != 1";
@@ -53,6 +55,7 @@ export const obtenerLugaresReposo = async () => {
     }
 }
 
+// Función para obtener un lugar de reposo por ID.
 export const obtenerLugaresReposoPorId = async (id) => {
     try {
         const query = "SELECT id, nombre FROM lugares_reposo WHERE id = ? AND eliminado != 1";
@@ -80,6 +83,7 @@ export const obtenerLugaresReposoPorId = async (id) => {
     }
 }
 
+// Función para actualizar un lugar de reposo.
 export const actualizarLugaresReposo = async (id, lugarReposo) => {
     try {
         const { nombre } = lugarReposo;
@@ -108,6 +112,7 @@ export const actualizarLugaresReposo = async (id, lugarReposo) => {
     }
 }
 
+// Función para eliminar un lugar de reposo (marcar como eliminado).
 export const eliminarLugaresReposo = async (id) => {
     try {
         const query = "UPDATE lugares_reposo SET eliminado = 1 WHERE id = ?";

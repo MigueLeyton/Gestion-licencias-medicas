@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear una licencia mutual.
 export const crearLicenciaMutual = async (licenciaMutual) => {
     try {
         const { licencia_id, mutual, institucion_mutual, fecha_compin } = licenciaMutual;
@@ -26,6 +27,7 @@ export const crearLicenciaMutual = async (licenciaMutual) => {
     }
 }
 
+// Función para obtener todas las licencias mutuales.
 export const obtenerLicenciaMutual = async () => {
     try {
         const query = "SELECT id, licencia_id, mutual, institucion_mutual, fecha_compin FROM licencia_mutual WHERE eliminado != 1";
@@ -50,6 +52,7 @@ export const obtenerLicenciaMutual = async () => {
     }
 }
 
+// Función para obtener una licencia mutual por ID.
 export const obtenerLicenciaMutualPorId = async (id) => {
     try {
         const query = "SELECT id, licencia_id, mutual, institucion_mutual, fecha_compin FROM licencia_mutual WHERE id = ? AND eliminado != 1";
@@ -75,6 +78,7 @@ export const obtenerLicenciaMutualPorId = async (id) => {
     }
 }
 
+// Función para obtener una licencia mutual por fecha.
 export const obtenerLicenciaMutualPorFecha = async (fecha) => {
     try {
         const query = "SELECT id, licencia_id, mutual, institucion_mutual, fecha_compin FROM licencia_mutual WHERE fecha_compin = ? AND eliminado != 1";
@@ -100,6 +104,7 @@ export const obtenerLicenciaMutualPorFecha = async (fecha) => {
     }
 }
 
+// Función para actualizar una licencia mutual.
 export const actualizarLicenciaMutual = async (id, licenciaMutual) => {
     try {
         const { licencia_id, mutual, institucion_mutual, fecha_compin } = licenciaMutual;
@@ -149,6 +154,7 @@ export const actualizarLicenciaMutual = async (id, licenciaMutual) => {
     }
 }
 
+// Función para eliminar una licencia mutual (marcar como eliminada).
 export const eliminarLicenciaMutual = async (id) => {
     try {
         const query = "UPDATE licencia_mutual SET eliminado = 1 WHERE id = ?";

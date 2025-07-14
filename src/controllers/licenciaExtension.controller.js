@@ -1,5 +1,7 @@
 import { crearLicenciaExtension, obtenerLicenciaExtension, obtenerLicenciaExtensionPorId, actualizarLicenciaExtension, eliminarLicenciaExtension } from "../models/licenciaExtension.models.js";
 
+// Controladores para la gestión de licencias de extensión
+// Crear una nueva licencia de extensión
 export const crearLicenciaExtensionController = async (req, res) => {
     try {
         const { licencia_id, es_extension, licencia_relacionada } = req.body;
@@ -38,6 +40,7 @@ export const crearLicenciaExtensionController = async (req, res) => {
     }
 }
 
+// Obtener todas las licencias de extensión
 export const obtenerLicenciaExtensionController = async (req, res) => {
     try {
         const resultado = await obtenerLicenciaExtension();
@@ -62,6 +65,7 @@ export const obtenerLicenciaExtensionController = async (req, res) => {
     }
 }
 
+// Obtener una licencia de extensión por ID
 export const obtenerLicenciaExtensionPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -95,6 +99,7 @@ export const obtenerLicenciaExtensionPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar una licencia de extensión
 export const actualizarLicenciaExtensionController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -127,6 +132,7 @@ export const actualizarLicenciaExtensionController = async (req, res) => {
     }
 }
 
+// Eliminar una licencia de extensión
 export const eliminarLicenciaExtensionController = async (req, res) => {
     try {
         const { id } = req.params;

@@ -1,6 +1,8 @@
 import { pool as db } from "../database/database.js";
 import { decodificarToken } from "../utils/jwt.js";
 
+// Middleware para verificar si el usuario es administrador
+// Este middleware se encarga de verificar si el usuario tiene el rol de administrador antes de permitir el acceso a ciertas rutas protegidas.
 export const verificarAdmin = async (req, res, next) => {
     try {
         const token = req.headers["authorization"]?.split(" ")[1]; // Obtener el token del header Authorization  

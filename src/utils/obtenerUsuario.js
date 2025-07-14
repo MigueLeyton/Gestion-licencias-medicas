@@ -4,6 +4,7 @@ import {config} from "dotenv"
 
 config()
 
+// Función para obtener los datos del usuario a partir del token JWT.
 export const obtenerDatosUsuario = async (token) => {
     try {
         const {id} = obtenerDatosToken(token)
@@ -21,6 +22,7 @@ export const obtenerDatosUsuario = async (token) => {
     }
 }
 
+// Función para obtener los datos del token JWT.
 const obtenerDatosToken = (token) => {
     const datosToken = jwt.decode(token, process.env.JWT_SECRET )
 

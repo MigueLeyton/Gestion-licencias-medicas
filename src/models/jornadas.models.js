@@ -1,5 +1,6 @@
 import { pool as db } from "../database/database.js";
 
+// Función para crear una jornada.
 export const crearJornada = async (jornada) => {
     try {
         const { nombre } = jornada;
@@ -28,6 +29,7 @@ export const crearJornada = async (jornada) => {
     }
 }
 
+// Función para obtener todas las jornadas.
 export const obtenerJornadas = async () => {
     try {
         const query = "SELECT id, nombre FROM jornadas WHERE eliminado != 1";
@@ -53,6 +55,7 @@ export const obtenerJornadas = async () => {
     }
 }
 
+// Función para obtener una jornada por ID.
 export const obtenerJornadasPorId = async (id) => {
     try {
         const query = "SELECT id, nombre FROM jornadas WHERE id = ? AND eliminado != 1";
@@ -80,6 +83,7 @@ export const obtenerJornadasPorId = async (id) => {
     }
 }
 
+// Función para actualizar una jornada.
 export const actualizarJornada = async (id, jornada) => {
     try {
         const { nombre } = jornada;
@@ -107,6 +111,7 @@ export const actualizarJornada = async (id, jornada) => {
     }
 }
 
+// Función para eliminar una jornada (marcar como eliminada).
 export const eliminarJornada = async (id) => {
     try {
         const query = "UPDATE jornadas SET eliminado = 1 WHERE id = ? and ELIMINADO != 1";

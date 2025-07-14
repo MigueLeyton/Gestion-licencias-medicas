@@ -1,5 +1,7 @@
 import { crearTrabajador, obtenerTrabajadores, obtenerTrabajadorPorId, actualizarTrabajador, eliminarTrabajador } from "../models/trabajadores.models.js";
 
+// Controladores para la gestión de trabajadores
+// Crear un nuevo trabajador
 export const crearTrabajadorController = async (req, res) => {
     try {
         const { rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible, tiene_hijos } = req.body;
@@ -45,6 +47,7 @@ export const crearTrabajadorController = async (req, res) => {
     }
 }
 
+// Obtener todos los trabajadores
 export const obtenerTrabajadoresController = async (req, res) => {
     try {
         const resultado = await obtenerTrabajadores();
@@ -69,6 +72,7 @@ export const obtenerTrabajadoresController = async (req, res) => {
     }
 }
 
+// Obtener un trabajador por ID
 export const obtenerTrabajadorPorIdController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -102,10 +106,16 @@ export const obtenerTrabajadorPorIdController = async (req, res) => {
     }
 }
 
+// Actualizar un trabajador
 export const actualizarTrabajadorController = async (req, res) => {
     try {
         const { id } = req.params;
-        const { rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible, tiene_hijos } = req.body;
+        const { rut, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, remuneracion_imponible } = req.body;
+        let { tiene_hijos } = req.body;
+
+        if(tiene_hijos == undefined || tiene_hijos == "") {
+            tiene_hijos = null;
+        }
 
         const trabajadorActualizado = {
             rut,
@@ -113,8 +123,8 @@ export const actualizarTrabajadorController = async (req, res) => {
             apellido_paterno,
             apellido_materno,
             fecha_nacimiento,
-            remuneracion_imponible: parseFloat(remuneracion_imponible),
-            tiene_hijos: Boolean(tiene_hijos)
+            remuneracion_imponible,
+            tiene_hijos
         }
 
         const resultado = await actualizarTrabajador(id, trabajadorActualizado);
@@ -138,6 +148,7 @@ export const actualizarTrabajadorController = async (req, res) => {
     }
 }
 
+// Eliminar un trabajador
 export const eliminarTrabajadorController = async (req, res) => {
     try {
         const { id } = req.params;

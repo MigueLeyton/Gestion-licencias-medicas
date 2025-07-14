@@ -5,6 +5,7 @@ import { verificarAdmin } from "../middlewares/verificarAdmin.js";
 
 const router = Router();
 
+// Rutas para manejar las operaciones relacionadas con las licencias de hijos de trabajadores.
 router.post("/licencia-hijo", verificarTokenMiddleware, crearLicenciaHijoController);
 router.get("/licencia-hijo", verificarTokenMiddleware, obtenerLicenciaHijosController);
 router.get("/licencia-hijo/:id", verificarTokenMiddleware, obtenerLicenciaHijoPorIdController);
